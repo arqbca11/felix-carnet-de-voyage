@@ -1,0 +1,6 @@
+# transient validation artifact from the §10 build/validate workflow
+check.js
+
+# OS / editor cruft
+.DS_Store
+*.swp

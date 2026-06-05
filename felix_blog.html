@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Felix — Carnet de voyage</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<!-- Post index (which weeks exist + their order). Posts themselves load on demand from posts/*.js -->
+<script src="posts/manifest.js"></script>
+<style>
+  :root{
+    --bg:#ffffff; --wash:#f6f7f6; --surface:#ffffff;
+    --ink:#15171a; --ink-soft:#3f444b; --muted:#8b9198;
+    --line:#ebece9; --line-2:#dfe1dd;
+    --accent:#1a73ff; --accent-deep:#0b51c9; --accent-wash:#e8f0ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Schibsted Grotesk',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+
+  /* MASTHEAD */
+  .masthead{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:var(--bg);padding:50px 28px 32px;}
+  .masthead svg.topo{position:absolute;inset:0;width:100%;height:100%;}
+  .mh-inner{position:relative;max-width:1340px;margin:0 auto;padding:0 24px;}
+  .kicker{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px;}
+  .brand{font-weight:700;font-size:58px;line-height:.95;letter-spacing:-2px;color:var(--ink);}
+  .brand em{font-style:normal;color:var(--accent);}
+  .blurb{font-family:'Newsreader',serif;font-size:18px;color:var(--ink-soft);margin-top:18px;max-width:540px;line-height:1.55;}
+  .tagline{font-size:12.5px;letter-spacing:.3px;color:var(--muted);margin-top:14px;}
+
+  /* READ ZONE (TTS) */
+  .readzone{max-width:1340px;margin:18px auto 0;padding:0 24px;}
+  .readbar{display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 16px;}
+  .rb-left{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-soft);}
+  .rb-left strong{color:var(--ink);font-weight:600;}
+  .rb-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+  .rb-right{display:flex;align-items:center;gap:8px;}
+  .rb-link{background:transparent;border:1px solid var(--line-2);border-radius:8px;padding:6px 12px;font-family:'Schibsted Grotesk',sans-serif;font-size:12.5px;font-weight:500;color:var(--ink-soft);cursor:pointer;transition:all .16s;}
+  .rb-link:hover{border-color:var(--accent);color:var(--accent);}
+  .key-entry,.voice-picker{display:none;margin-top:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+  .ke-label{font-size:12px;color:var(--ink-soft);font-weight:600;margin-bottom:9px;}
+  .ke-label span{font-weight:400;color:var(--muted);}
+  .ke-row{display:flex;gap:8px;}
+  .ke-input{flex:1;border:1px solid var(--line-2);border-radius:8px;padding:9px 12px;font-size:14px;font-family:'Schibsted Grotesk',sans-serif;color:var(--ink);outline:none;}
+  .ke-input:focus{border-color:var(--accent);}
+  .ke-btn{background:var(--accent);border:none;color:#fff;border-radius:8px;padding:0 16px;font-family:'Schibsted Grotesk',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap;}
+  .ke-msg{font-size:12px;color:#b4453f;margin-top:8px;min-height:14px;}
+  .vp-label{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;}
+  .vp-list{display:flex;flex-direction:column;gap:7px;max-height:230px;overflow-y:auto;}
+  .vitem{display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:9px;border:1px solid var(--line);background:var(--surface);cursor:pointer;transition:all .15s;}
+  .vitem:hover{border-color:var(--accent);}
+  .vitem.selected{border-color:var(--accent);background:var(--accent-wash);}
+  .vdot{width:14px;height:14px;border-radius:50%;border:2px solid var(--line-2);flex-shrink:0;cursor:pointer;}
+  .vitem.selected .vdot{border-color:var(--accent);background:var(--accent);}
+  .vinfo{flex:1;min-width:0;}
+  .vname{font-size:13px;color:var(--ink);font-weight:500;}
+  .vitem.selected .vname{color:var(--accent-deep);}
+  .vmeta{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .vprev{width:28px;height:28px;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .vprev:hover{border-color:var(--accent);color:var(--accent);}
+  .vprev svg{width:11px;height:11px;}
+  .vp-msg{font-size:12px;color:var(--muted);margin-top:9px;font-style:italic;min-height:14px;}
+
+  /* LAYOUT */
+  .layout{max-width:1340px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:36px;align-items:start;}
+  .feed{padding:28px 0 90px;min-width:0;}
+  .map-rail{position:sticky;top:24px;align-self:start;padding-top:28px;}
+  .map-box{display:flex;flex-direction:column;height:calc(100vh - 130px);max-height:760px;min-height:500px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);box-shadow:0 16px 40px -30px rgba(0,0,0,.5);position:relative;}
+  .map-cap{flex:0 0 auto;padding:11px 16px;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);background:var(--surface);}
+  #map{flex:1 1 auto;width:100%;min-height:0;background:var(--wash);}
+  .map-close{display:none;position:absolute;top:9px;right:10px;z-index:5;background:var(--surface);border:1px solid var(--line-2);border-radius:8px;padding:6px 11px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;font-family:'Schibsted Grotesk',sans-serif;}
+
+  /* POST — two-column reading */
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 28px 22px;margin-bottom:24px;
+    scroll-margin-top:20px;transition:box-shadow .25s,border-color .25s;display:grid;grid-template-columns:minmax(0,1fr);column-gap:36px;}
+  .post:hover{box-shadow:0 18px 40px -30px rgba(0,0,0,.45);}
+  .post.active{border-color:var(--accent);box-shadow:0 18px 44px -28px rgba(26,115,255,.45);}
+  .post.split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+  .post-head{grid-column:1/-1;margin-bottom:18px;}
+  .post.split .article{grid-column:1;grid-row:2;}
+  .post.split .post-side{grid-column:2;grid-row:2;}
+
+  .post-meta{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);margin-bottom:12px;}
+  .stop-no{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;
+    background:var(--accent-wash);color:var(--accent-deep);font-size:12.5px;font-weight:700;flex-shrink:0;}
+  .place{font-weight:600;color:var(--ink-soft);}
+  .dot{color:var(--line-2);}
+  .post h2{font-family:'Newsreader',serif;font-weight:500;font-size:30px;line-height:1.12;letter-spacing:-.3px;margin:0 0 4px;color:var(--ink);}
+  .post h2 .en-title{display:block;font-family:'Schibsted Grotesk',sans-serif;font-size:13.5px;color:var(--muted);font-weight:400;letter-spacing:.2px;margin-top:7px;}
+  .post-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px;}
+  .act{font-family:'Schibsted Grotesk',sans-serif;font-size:13px;font-weight:500;letter-spacing:.1px;padding:9px 15px;border-radius:9px;cursor:pointer;
+    border:1px solid var(--line-2);background:var(--surface);color:var(--ink-soft);transition:all .16s;}
+  .act:hover{border-color:var(--ink-soft);color:var(--ink);}
+  .act.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .act.act-read{border-color:var(--accent);color:var(--accent);}
+  .act.act-read:hover{background:var(--accent-wash);}
+  .act.act-read.playing{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+  .article{font-family:'Newsreader',serif;font-size:19px;line-height:1.74;color:#23262b;margin-top:0;min-width:0;}
+  .article p{position:relative;padding:3px 4px 3px 30px;margin:0 0 11px;border-radius:6px;transition:background .2s;}
+  .article p:last-child{margin-bottom:0;}
+  .article p.speaking{background:var(--accent-wash);}
+  .pp-btn{position:absolute;left:2px;top:6px;width:22px;height:22px;border-radius:50%;border:1px solid var(--line-2);background:var(--surface);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;opacity:.5;transition:all .16s;}
+  .pp-btn:hover{opacity:1;border-color:var(--accent);color:var(--accent);}
+  .pp-btn.playing{opacity:1;border-color:var(--accent);background:var(--accent);color:#fff;}
+  .pp-btn svg{width:10px;height:10px;}
+
+  .post-side{display:none;min-width:0;}
+  .post.split .post-side{display:flex;flex-direction:column;gap:16px;}
+
+  .en-block{display:none;padding:15px 18px;background:var(--wash);border-radius:10px;font-size:15px;color:var(--ink-soft);line-height:1.6;}
+  .en-block.open{display:block;animation:fade .25s ease;}
+  .en-block p{margin-bottom:10px;}
+  .en-block p:last-child{margin-bottom:0;}
+
+  .notes{display:none;border:1px solid var(--line-2);border-radius:14px;overflow:hidden;background:var(--wash);}
+  .notes.open{display:block;animation:fade .25s ease;}
+  .notes-head{background:var(--accent-wash);padding:12px 18px;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent-deep);font-weight:700;}
+  .notes-body{padding:16px 18px 18px;}
+  .nsec-label{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);font-weight:600;margin:4px 0 11px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+  td{padding:8px 0;font-size:14.5px;vertical-align:top;border-bottom:1px solid var(--line);}
+  tr:last-child td{border-bottom:none;}
+  td.fr{font-family:'Newsreader',serif;font-style:italic;color:var(--accent-deep);width:44%;padding-right:14px;font-size:15.5px;}
+  td.en{color:var(--ink-soft);}
+  .gram{margin-bottom:15px;}
+  .gram:last-child{margin-bottom:0;}
+  .gram h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:5px;}
+  .gram p{font-size:14px;color:var(--ink-soft);line-height:1.65;}
+  .gram .ex{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);}
+  .gram .arrow{color:var(--muted);font-style:normal;}
+
+  .map-toggle{position:fixed;right:16px;bottom:16px;z-index:1200;background:var(--accent);color:#fff;border:none;border-radius:30px;
+    padding:13px 21px;font-family:'Schibsted Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;
+    box-shadow:0 10px 26px -8px rgba(26,115,255,.5);display:none;align-items:center;gap:8px;}
+
+  .footer{text-align:center;padding:34px 20px 44px;color:var(--muted);font-size:13px;font-family:'Newsreader',serif;font-style:italic;}
+
+  /* MARKER */
+  .pin{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+    background:var(--ink);border:2px solid #fff;box-shadow:0 3px 9px rgba(0,0,0,.3);}
+  .pin span{transform:rotate(45deg);color:#fff;font-family:'Schibsted Grotesk',sans-serif;font-weight:700;font-size:13px;}
+  .pin.active{background:var(--accent);}
+  .leaflet-popup-content-wrapper{border-radius:12px;box-shadow:0 10px 30px -10px rgba(0,0,0,.3);}
+  .leaflet-popup-content{font-family:'Schibsted Grotesk',sans-serif;margin:11px 14px;}
+  .pop-place{font-weight:600;color:var(--ink);font-size:14px;}
+  .pop-title{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);font-size:13.5px;margin-top:3px;}
+
+  @keyframes fade{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  @media(max-width:1024px){
+    .readzone{padding:0 18px;}
+    .layout{grid-template-columns:1fr;padding:0 18px;gap:0;}
+    .feed{padding:26px 0 80px;}
+    .map-rail{position:fixed;inset:0;z-index:1000;padding-top:0;transform:translateX(100%);transition:transform .3s ease;}
+    .map-rail.open{transform:none;}
+    .map-box{height:100%;max-height:none;border-radius:0;border:none;box-shadow:none;}
+    .map-close{display:block;}
+    .map-toggle{display:flex;}
+    .post.split{grid-template-columns:1fr;}
+    .post.split .article{grid-column:1;grid-row:auto;}
+    .post.split .post-side{grid-column:1;grid-row:auto;}
+    .brand{font-size:44px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="topo" viewBox="0 0 1200 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#eef0ed" stroke-width="1.2">
+      <path d="M-50 200 C 200 130, 380 250, 600 170 S 1000 90, 1260 180"/>
+      <path d="M-50 230 C 220 170, 400 280, 620 200 S 1020 130, 1260 210"/>
+      <path d="M-50 160 C 180 90, 420 210, 640 120 S 1010 50, 1260 140"/>
+      <path d="M-50 120 C 240 60, 460 170, 660 80 S 1040 20, 1260 110"/>
+      <path d="M-50 90 C 260 30, 480 140, 680 50 S 1060 -10, 1260 80"/>
+    </g>
+  </svg>
+  <div class="mh-inner">
+    <div class="kicker">Carnet de voyage</div>
+    <div class="brand">Felix<em>.</em></div>
+    <div class="blurb">Anglais de naissance, français de cœur. Je voyage dans le monde avec mes chaussures de randonnée et mon appareil photo.</div>
+    <div class="tagline">Une semaine, un endroit — mes histoires en français.</div>
+  </div>
+</header>
+
+<div class="readzone">
+  <div class="readbar" id="readbar">
+    <div class="rb-left"><span class="rb-dot"></span><span>Lecture audio · voix <strong id="rbVoice">—</strong></span></div>
+    <div class="rb-right">
+      <button class="rb-link" id="rbSpeed" onclick="cycleSpeed()">1.0×</button>
+      <button class="rb-link" id="voiceBtn" onclick="voiceBtnClick()">Changer de voix</button>
+    </div>
+  </div>
+  <div class="key-entry" id="keyEntry">
+    <div class="ke-label">🎙 Clé API ElevenLabs <span>(optionnel — sans clé, la voix du navigateur est utilisée)</span></div>
+    <div class="ke-row">
+      <input class="ke-input" id="keyInput" type="password" placeholder="Collez votre clé API…"/>
+      <button class="ke-btn" onclick="saveKey()">Connecter</button>
+    </div>
+    <div class="ke-msg" id="keyMsg"></div>
+  </div>
+  <div class="voice-picker" id="voicePicker">
+    <div class="vp-label">Choisir une voix</div>
+    <div class="vp-list" id="vpList"></div>
+    <div class="vp-msg" id="vpMsg"></div>
+  </div>
+</div>
+
+<div class="layout">
+  <main class="feed" id="feed"></main>
+  <aside class="map-rail" id="mapCol">
+    <div class="map-box">
+      <div class="map-cap">Itinéraire</div>
+      <button class="map-close" onclick="toggleMap(false)">✕</button>
+      <div id="map"></div>
+    </div>
+  </aside>
+</div>
+
+<button class="map-toggle" id="mapToggle" onclick="toggleMap(true)">🗺 La carte</button>
+
+<div class="footer">Carnet de Felix — un projet pour apprendre le français · à suivre…</div>
+
+<script>
+/* ── POST REGISTRY ──────────────────────────────────────────────────────────
+   This file is now a TEMPLATE: it carries no article content. Each week lives in
+   its own resource file under posts/ (article, vocab, grammar, map location) and
+   registers itself by calling FelixBlog.register(...). The loader below pulls the
+   LATEST THREE entries from posts/manifest.js and injects only those scripts, so
+   only three weeks are ever shown. See CLAUDE.md §5–§7. */
+const POSTS = [];                         // filled by FelixBlog.register at load time
+const HOW_MANY = 3;                       // how many of the latest weeks to display
+
+window.FelixBlog = {
+  register(post){ POSTS.push(post); }
+};
+
+// Inject the <script> tags for the latest N posts, then run `done` once all settle.
+// Uses dynamic <script> tags (NOT fetch) so the page works opened directly via file://.
+function loadPosts(done){
+  const manifest = Array.isArray(window.FELIX_MANIFEST) ? window.FELIX_MANIFEST : [];
+  const latest = manifest.slice(-HOW_MANY);        // manifest is chronological; tail = newest
+  if(!latest.length){ done(); return; }
+  let pending = latest.length;
+  const settle = () => { if(--pending === 0){ POSTS.sort((a,b)=>a.no-b.no); done(); } };
+  latest.forEach(entry => {
+    const s = document.createElement('script');
+    s.src = entry.file;
+    s.onload = settle;
+    s.onerror = () => { console.error('Could not load post:', entry.file); settle(); };
+    document.head.appendChild(s);
+  });
+}
+
+// ── ICONS ──
+const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>';
+const ICON_STOP = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>';
+const ICON_SPIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" style="animation:spin .8s linear infinite"><path d="M12 3a9 9 0 1 0 9 9"/></svg>';
+
+// ── SAFE STORAGE ──
+const KEY_API='elevenlabs_api_key', KEY_VOICE='elevenlabs_voice_id', KEY_VNAME='elevenlabs_voice_name', KEY_SPEED='felix_read_speed';
+function getLS(k){ try{return localStorage.getItem(k);}catch(e){return null;} }
+function setLS(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
+
+// ── BUILD FEED ──
+const feed = document.getElementById('feed');
+function buildFeed(){ POSTS.forEach(post => {
+  const card = document.createElement('article');
+  card.className = 'post'; card.id = post.id;
+
+  const frHTML = post.fr.map((p,i) =>
+    `<p><button class="pp-btn" data-play="para" data-id="${post.id}" data-i="${i}" aria-label="Lire">${ICON_PLAY}</button>${p}</p>`).join('');
+  const enHTML = post.en.map(p => `<p>${p}</p>`).join('');
+  const vocabRows = post.vocab.map(v => `<tr><td class="fr">${v[0]}</td><td class="en">${v[1]}</td></tr>`).join('');
+  const gramHTML = post.gram.map(g => `<div class="gram"><h4>${g.h}</h4><p>${g.p}</p></div>`).join('');
+
+  card.innerHTML = `
+    <div class="post-head">
+      <div class="post-meta">
+        <span class="stop-no">${post.no}</span>
+        <span class="place">${post.flag} ${post.place}, ${post.country}</span>
+        <span class="dot">·</span><span>${post.date}</span>
+      </div>
+      <h2>${post.title}<span class="en-title">${post.titleEn}</span></h2>
+      <div class="post-actions">
+        <button class="act act-read" data-play="all" data-id="${post.id}">▶ Lire l'article</button>
+        <button class="act" data-toggle="en" data-id="${post.id}">Traduction (EN)</button>
+        <button class="act" data-toggle="notes" data-id="${post.id}">Notes de français</button>
+        <button class="act" data-fly="${post.id}">Voir sur la carte</button>
+      </div>
+    </div>
+    <div class="article">${frHTML}</div>
+    <aside class="post-side">
+      <div class="en-block" id="en-${post.id}">${enHTML}</div>
+      <div class="notes" id="notes-${post.id}">
+        <div class="notes-head">Notes de français · vocabulaire & grammaire</div>
+        <div class="notes-body">
+          <div class="nsec-label">Vocabulaire</div>
+          <table>${vocabRows}</table>
+          <div class="nsec-label">Grammaire</div>
+          ${gramHTML}
+        </div>
+      </div>
+    </aside>`;
+  feed.appendChild(card);
+}); }
+
+// ── INTERACTIONS ──
+feed.addEventListener('click', e => {
+  const playBtn = e.target.closest('[data-play]');
+  if (playBtn) { e.stopPropagation(); onPlay(playBtn); return; }
+  const btn = e.target.closest('.act'); if (!btn) return;
+  if (btn.dataset.toggle) {
+    const block = document.getElementById(`${btn.dataset.toggle}-${btn.dataset.id}`);
+    const open = block.classList.toggle('open');
+    btn.classList.toggle('on', open);
+    const post = btn.closest('.post');
+    post.classList.toggle('split', !!post.querySelector('.en-block.open, .notes.open'));
+  } else if (btn.dataset.fly) {
+    flyTo(btn.dataset.fly);
+  }
+});
+
+// ── AUDIO ENGINE ──
+const AUDIO_CACHE = new Map();
+let curAudio=null, curUtter=null, seqToken=0, speed=1, activePlayer=null;
+
+async function fetchTTS(text){
+  const key=getLS(KEY_API), vid=getLS(KEY_VOICE);
+  if(!key||!vid) return null;
+  const ck = vid+'|'+text;
+  if(AUDIO_CACHE.has(ck)) return AUDIO_CACHE.get(ck);
+  try{
+    const res=await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${vid}`,{method:'POST',
+      headers:{'xi-api-key':key,'Content-Type':'application/json'},
+      body:JSON.stringify({text,model_id:'eleven_multilingual_v2',voice_settings:{stability:.5,similarity_boost:.75}})});
+    if(!res.ok) return null;
+    const url=URL.createObjectURL(await res.blob());
+    AUDIO_CACHE.set(ck,url);
+    return url;
+  }catch(e){ return null; }
+}
+
+function clearPlayingUI(){
+  document.querySelectorAll('.pp-btn').forEach(b=>{ b.classList.remove('playing'); b.innerHTML=ICON_PLAY; });
+  document.querySelectorAll('.article p.speaking').forEach(p=>p.classList.remove('speaking'));
+  document.querySelectorAll('.act-read').forEach(b=>{ b.classList.remove('playing'); b.textContent="▶ Lire l'article"; });
+}
+function stopAll(){
+  seqToken++;
+  if(curAudio){ try{curAudio.pause();}catch(e){} curAudio=null; }
+  if(window.speechSynthesis){ try{speechSynthesis.cancel();}catch(e){} }
+  curUtter=null; activePlayer=null; clearPlayingUI();
+}
+
+function playOne(text,my,btn){
+  return new Promise(resolve=>{
+    const done=()=>resolve();
+    const key=getLS(KEY_API), vid=getLS(KEY_VOICE);
+    const fallback=()=>{
+      if(my!==seqToken) return done();
+      if(!('speechSynthesis' in window)) return done();
+      try{speechSynthesis.cancel();}catch(e){}
+      const u=new SpeechSynthesisUtterance(text); u.lang='fr-FR'; u.rate=Math.max(.5,Math.min(1.3,speed*0.95));
+      const vs=speechSynthesis.getVoices(); const fr=vs.find(v=>v.lang&&v.lang.toLowerCase().startsWith('fr')); if(fr)u.voice=fr;
+      if(btn)btn.innerHTML=ICON_STOP;
+      u.onend=done; u.onerror=done; curUtter=u; speechSynthesis.speak(u);
+    };
+    const start=(url)=>{
+      if(my!==seqToken) return done();
+      const a=new Audio(url); a.playbackRate=speed; curAudio=a;
+      if(btn)btn.innerHTML=ICON_STOP;
+      a.onended=done; a.onerror=()=>fallback();
+      a.play().catch(()=>fallback());
+    };
+    if(key&&vid){ fetchTTS(text).then(url=>{ if(my!==seqToken)return done(); url?start(url):fallback(); }).catch(fallback); }
+    else fallback();
+  });
+}
+
+async function speakSequence(items){
+  const my=++seqToken;
+  for(let i=0;i<items.length;i++){
+    if(my!==seqToken) return;
+    const {text,para,btn}=items[i];
+    if(para) para.classList.add('speaking');
+    if(btn){ btn.classList.add('playing'); btn.innerHTML=ICON_SPIN; }
+    if(items[i+1]) fetchTTS(items[i+1].text);
+    await playOne(text,my,btn);
+    if(para) para.classList.remove('speaking');
+    if(btn){ btn.classList.remove('playing'); btn.innerHTML=ICON_PLAY; }
+    if(my!==seqToken) return;
+  }
+}
+
+function onPlay(btn){
+  const kind=btn.dataset.play, id=btn.dataset.id;
+  const playerId = kind+':'+id+(btn.dataset.i!=null?(':'+btn.dataset.i):'');
+  if(activePlayer===playerId){ stopAll(); return; }
+  stopAll();
+  activePlayer=playerId;
+  const post=POSTS.find(p=>p.id===id);
+  const cardEl=document.getElementById(id);
+  const paras=[...cardEl.querySelectorAll('.article p')];
+  const ppBtns=[...cardEl.querySelectorAll('.pp-btn')];
+  let items;
+  if(kind==='all'){
+    items=post.fr.map((t,i)=>({text:t,para:paras[i],btn:ppBtns[i]}));
+    btn.classList.add('playing'); btn.textContent='■ Arrêter';
+  } else {
+    const i=+btn.dataset.i; items=[{text:post.fr[i],para:paras[i],btn:ppBtns[i]}];
+  }
+  speakSequence(items).then(()=>{ if(activePlayer===playerId) stopAll(); });
+}
+
+// ── VOICE / KEY UI ──
+let allVoices=[], pickerOpen=false;
+const SPEEDS=[0.75,0.9,1.0,1.1];
+
+function refreshReadbar(){
+  document.getElementById('readbar').style.display='flex';
+  const key=getLS(KEY_API);
+  document.getElementById('rbVoice').textContent = key ? (getLS(KEY_VNAME)||'ElevenLabs') : 'navigateur';
+  document.getElementById('voiceBtn').textContent = key ? 'Changer de voix' : 'Connecter ElevenLabs';
+  document.getElementById('rbSpeed').textContent = speed.toFixed(1)+'×';
+}
+function voiceBtnClick(){
+  if(getLS(KEY_API)){ toggleVoicePicker(); }
+  else { const ke=document.getElementById('keyEntry'); ke.style.display = ke.style.display==='block'?'none':'block'; }
+}
+function cycleSpeed(){
+  let i=SPEEDS.indexOf(speed); i=(i+1)%SPEEDS.length; if(i<0)i=2;
+  speed=SPEEDS[i]; setLS(KEY_SPEED,String(speed));
+  if(curAudio) curAudio.playbackRate=speed;
+  document.getElementById('rbSpeed').textContent=speed.toFixed(1)+'×';
+}
+async function saveKey(){
+  const v=document.getElementById('keyInput').value.trim().replace(/[\u200B-\u200D\uFEFF]/g,'');
+  if(!v) return;
+  document.getElementById('keyMsg').textContent='Connexion…';
+  const ok=await fetchVoices(v,true);
+  if(ok){ setLS(KEY_API,v); AUDIO_CACHE.clear(); document.getElementById('keyEntry').style.display='none'; document.getElementById('keyMsg').textContent=''; refreshReadbar(); }
+  else document.getElementById('keyMsg').textContent='Connexion impossible — vérifiez la clé.';
+}
+async function fetchVoices(key,showPicker){
+  try{
+    const res=await fetch('https://api.elevenlabs.io/v1/voices',{headers:{'xi-api-key':key}});
+    if(!res.ok) return false;
+    const data=await res.json(); allVoices=data.voices||[];
+    const saved=getLS(KEY_VOICE);
+    if(saved){ const v=allVoices.find(x=>x.voice_id===saved); if(v)setLS(KEY_VNAME,v.name); }
+    else if(allVoices.length){ setLS(KEY_VOICE,allVoices[0].voice_id); setLS(KEY_VNAME,allVoices[0].name); }
+    if(showPicker) renderVoicePicker();
+    refreshReadbar();
+    return true;
+  }catch(e){ return false; }
+}
+function toggleVoicePicker(){
+  pickerOpen=!pickerOpen;
+  document.getElementById('voicePicker').style.display = pickerOpen?'block':'none';
+  if(pickerOpen){
+    if(allVoices.length) renderVoicePicker();
+    else { document.getElementById('vpMsg').textContent='Chargement…'; fetchVoices(getLS(KEY_API),true); }
+  }
+}
+function renderVoicePicker(){
+  const c=document.getElementById('vpList'), saved=getLS(KEY_VOICE); c.innerHTML='';
+  allVoices.forEach(v=>{
+    const sel=v.voice_id===saved;
+    const d=document.createElement('div'); d.className='vitem'+(sel?' selected':'');
+    const desc=v.labels?Object.values(v.labels).slice(0,2).join(' · '):'';
+    d.innerHTML=`<div class="vdot"></div><div class="vinfo"><div class="vname">${v.name}</div>${desc?`<div class="vmeta">${desc.slice(0,52)}</div>`:''}</div><button class="vprev">${ICON_PLAY}</button>`;
+    d.querySelector('.vinfo').onclick=()=>{
+      setLS(KEY_VOICE,v.voice_id); setLS(KEY_VNAME,v.name); AUDIO_CACHE.clear();
+      document.querySelectorAll('.vitem').forEach(i=>i.classList.remove('selected')); d.classList.add('selected');
+      refreshReadbar(); document.getElementById('vpMsg').textContent='Voix : '+v.name;
+    };
+    d.querySelector('.vdot').onclick=()=>d.querySelector('.vinfo').click();
+    d.querySelector('.vprev').onclick=async ev=>{
+      ev.stopPropagation(); const b=ev.currentTarget; b.innerHTML=ICON_STOP;
+      try{
+        const r=await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${v.voice_id}`,{method:'POST',
+          headers:{'xi-api-key':getLS(KEY_API),'Content-Type':'application/json'},
+          body:JSON.stringify({text:"Bonjour ! Bienvenue dans le carnet de voyage de Felix.",model_id:'eleven_multilingual_v2',voice_settings:{stability:.5,similarity_boost:.75}})});
+        if(!r.ok) throw 0;
+        const a=new Audio(URL.createObjectURL(await r.blob())); a.play();
+        a.onended=()=>{ b.innerHTML=ICON_PLAY; };
+      }catch(err){ b.innerHTML=ICON_PLAY; }
+    };
+    c.appendChild(d);
+  });
+  document.getElementById('vpMsg').textContent='';
+}
+
+// ── MAP ──
+let map, markers = {};
+function makeIcon(no, active){
+  return L.divIcon({className:'', html:`<div class="pin${active?' active':''}"><span>${no}</span></div>`,
+    iconSize:[28,28], iconAnchor:[14,28], popupAnchor:[0,-28]});
+}
+function initMap(){
+  map = L.map('map', {scrollWheelZoom:true, zoomControl:true});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18, attribution:'© OSM'}).addTo(map);
+  const pts = [];
+  POSTS.forEach(p => {
+    const m = L.marker([p.lat, p.lng], {icon: makeIcon(p.no,false)}).addTo(map);
+    m.bindPopup(`<div class="pop-place">${p.flag} ${p.place}</div><div class="pop-title">${p.title}</div>`);
+    m.on('click', () => { document.getElementById(p.id).scrollIntoView(); highlight(p.id); });
+    markers[p.id] = m; pts.push([p.lat, p.lng]);
+  });
+  L.polyline(pts, {color:'#1a73ff', weight:2, dashArray:'2 8', opacity:.75}).addTo(map);
+  if(pts.length) map.fitBounds(pts, {padding:[35,35]});
+  else map.setView([46, 12], 5);                 // fallback if no posts loaded
+  setTimeout(() => map.invalidateSize(), 60);
+}
+function highlight(id){
+  document.querySelectorAll('.post').forEach(c => c.classList.toggle('active', c.id===id));
+  POSTS.forEach(p => markers[p.id].setIcon(makeIcon(p.no, p.id===id)));
+}
+function flyTo(id){
+  const p = POSTS.find(x => x.id===id);
+  if (window.innerWidth <= 1024) toggleMap(true);
+  setTimeout(() => { map.invalidateSize(); map.flyTo([p.lat, p.lng], 9, {duration:1.1}); markers[id].openPopup(); }, 60);
+  highlight(id);
+}
+function toggleMap(open){
+  document.getElementById('mapCol').classList.toggle('open', open);
+  if (open) setTimeout(() => map.invalidateSize(), 120);
+}
+
+// ── INIT ──
+window.addEventListener('load', () => {
+  loadPosts(() => {            // pull the latest three weeks from posts/, then render
+    buildFeed();
+    initMap();
+  });
+  const s=parseFloat(getLS(KEY_SPEED)); if(!isNaN(s)) speed=s;
+  if(window.speechSynthesis) speechSynthesis.getVoices();
+  const key=getLS(KEY_API);
+  if(key) fetchVoices(key,false);
+  refreshReadbar();
+});
+window.addEventListener('resize', () => { if(map) map.invalidateSize(); });
+</script>
+</body>
+</html>
