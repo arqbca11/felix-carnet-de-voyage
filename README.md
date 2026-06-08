@@ -1,5 +1,7 @@
 # Felix — Carnet de voyage 🏔️
 
+### 👉 Read it live: **https://arqbca11.github.io/felix-carnet-de-voyage/**
+
 A French-learning travel blog you read for **comprehensible input**. Follow **Felix**, a British-born,
 French-raised outdoorsperson, week by week as he ski-tours, climbs, and paddles his way across Europe —
 each post in natural French, with an English translation, vocabulary, grammar notes, an interactive map,
