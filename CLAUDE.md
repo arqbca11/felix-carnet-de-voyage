@@ -85,12 +85,15 @@ transparent vocabulary); the sensibility lives in the observation, not the synta
 | 3 | 24 May 2026 | Vallée de la Soča (Bovec / Kobarid) | Slovénie 🇸🇮 | Whitewater rafting w/ guide Anže | 46.3375, 13.5526 |
 | 4 | 31 May 2026 | Piran | Slovénie 🇸🇮 | Sea kayaking the Adriatic coast; old town + salt pans | 45.5288, 13.5683 |
 | 5 | 7 Jun 2026 | Istrie (Poreč → Motovun → Pula / Cap Kamenjak) | Croatie 🇭🇷 | Parenzana cycle path through the hills + sea kayaking the wild south coast | 45.0811, 13.6387 |
+| 6 | 14 Jun 2026 | Paklenica (Velebit / Anića Kuk, nr Starigrad) | Croatie 🇭🇷 | Multi-pitch rock on the big wall Anića Kuk w/ Ivana; sport routes; the *bura* wind | 44.3346, 15.4622 |
 
 **Recurring side characters:** Marco (Italian mountain guide, ~50, old friend, equal climber);
-Anže (Slovenian rafting guide); Damjan (Piran fisherman); Davor (Istrian truffle hunter, calm, two dogs).
+Anže (Slovenian rafting guide); Damjan (Piran fisherman); Davor (Istrian truffle hunter, calm, two dogs);
+Ivana (Croatian climber, knows the Paklenica walls by heart, leads Anića Kuk).
 
-**Next, teased:** south to the **Velebit massif / Paklenica** (e.g. Starigrad) — back to the rock,
-big limestone walls. Keep the overland hop down the Croatian coast realistic from Istria.
+**Next, teased:** east into **Bosnia** — and a change of mode: Felix puts the rope away to **walk**
+several days (a multi-day trek; slow-travel, Bouvier register). Keep the overland hop east realistic.
+First post to fold in the §2a reflective sensibility (Saint-Exupéry on the rope; the wordless summit).
 
 ---
 
@@ -104,8 +107,10 @@ description)**. Layer other A2/B1 points on top, tied to that week's content, an
 - Covered so far: `aller`+inf (near future), reflexive verbs, `c'est…qui / c'est…que`, time/sequence
   signposts, `pendant`, superlative, `même si`, `si…que`, comparatives, verb+infinitive glue words,
   `il y a` = there is **and** "ago", `depuis`+present, être-verb agreement, the **gérondif** (`en riant`),
-  `il faut`+inf / imperative, `avant de`+inf. Stretch seeds left transparent: `plus-que-parfait`
-  (`avait préparé`), `conditionnel passé` (`aurait adoré`).
+  `il faut`+inf / imperative, `avant de`+inf, `ne…que` (only), `ne…plus` (no longer), and the
+  past participle agreeing with a **preceding direct object** (`on les a mangées`). Stretch seeds left
+  transparent: `plus-que-parfait` (`avait préparé`, `avait déjà grimpé`), `conditionnel passé`
+  (`aurait adoré`).
 - **3 grammar notes per post**, English explanation + French examples wrapped in
   `<span class="ex">…</span>`, with `<span class="arrow">→</span>` for glosses.
 

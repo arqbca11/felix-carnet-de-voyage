@@ -14,4 +14,5 @@ window.FELIX_MANIFEST = [
   { id:'soca',      file:'posts/03-soca.js'      },
   { id:'piran',     file:'posts/04-piran.js'     },
   { id:'istrie',    file:'posts/05-istrie.js'    },
+  { id:'paklenica', file:'posts/06-paklenica.js' },
 ];
