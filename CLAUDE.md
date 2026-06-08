@@ -56,12 +56,14 @@ The page shows the **latest three** weeks. No build step — open the HTML direc
 | 1 | 10 May 2026 | Chamonix | France 🇫🇷 | 3-day spring ski-touring traverse, hut-to-hut on glaciers | 45.9237, 6.8694 |
 | 2 | 17 May 2026 | Les Dolomites (Cortina / Cima Grande) | Italie 🇮🇹 | Multi-pitch rock climb w/ old friend Marco | 46.5369, 12.1357 |
 | 3 | 24 May 2026 | Vallée de la Soča (Bovec / Kobarid) | Slovénie 🇸🇮 | Whitewater rafting w/ guide Anže | 46.3375, 13.5526 |
+| 4 | 31 May 2026 | Piran | Slovénie 🇸🇮 | Sea kayaking the Adriatic coast; old town + salt pans | 45.5288, 13.5683 |
+| 5 | 7 Jun 2026 | Istrie (Poreč → Motovun → Pula / Cap Kamenjak) | Croatie 🇭🇷 | Parenzana cycle path through the hills + sea kayaking the wild south coast | 45.0811, 13.6387 |
 
 **Recurring side characters:** Marco (Italian mountain guide, ~50, old friend, equal climber);
-Anže (Slovenian rafting guide).
+Anže (Slovenian rafting guide); Damjan (Piran fisherman); Davor (Istrian truffle hunter, calm, two dogs).
 
-**Next, teased:** the **Adriatic coast / the sea** (e.g. Piran, then Croatian Istria) — sea kayaking
-or coastal life. Keep the overland hop realistic from the Soča valley.
+**Next, teased:** south to the **Velebit massif / Paklenica** (e.g. Starigrad) — back to the rock,
+big limestone walls. Keep the overland hop down the Croatian coast realistic from Istria.
 
 ---
 
