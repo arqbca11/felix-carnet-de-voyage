@@ -47,6 +47,33 @@ The page shows the **latest three** weeks. No build step — open the HTML direc
 - **Light recurring threads** (use naturally, NOT every post): collects a small stone from places;
   the grandfather memory. Don't make these formulaic.
 
+### 2a. Reflective register — literary sensibility (flavor, not pastiche)
+
+Felix's *reflective* sentences should quietly draw on two travel writers. This shapes **what he
+notices**, not how fancy his French is. The French stays **A2** (short-to-medium sentences,
+transparent vocabulary); the sensibility lives in the observation, not the syntax.
+
+- **Nicolas Bouvier** (*L'Usage du monde*) — slow travel; you don't master a journey, it works on
+  you (*« on croit qu'on va faire un voyage, mais bientôt c'est le voyage qui vous fait »*). Ordinary
+  people and small moments over monuments; unhurried, curious, humane. Use for **why Felix lingers**:
+  a café conversation or a guide's story can matter as much as a summit. Especially the slower
+  coastal posts.
+- **Antoine de Saint-Exupéry** (*Terre des hommes*) — meaning through effort, solitude, and
+  comradeship; hardship and the bond between people who share risk reveal what matters; the land
+  tests and shapes you. Cleaner, more classical, more rhythmic than Bouvier. Use for the **quiet
+  pride after a hard day**, the **wordless understanding** among mountain/river people, landscape as
+  something that teaches him about himself.
+
+**Guardrails (do not break):**
+1. **One or two reflective sentences per post, max** — always **earned by a concrete scene**, never
+   floating philosophy.
+2. **Stay Felix:** experienced, understated, a touch dry. No purple prose, no aphorism-dumping, and
+   **never quote these authors** directly or name them.
+3. **Reinforce, don't replace** the established threads (grandfather, competence, motion toward the
+   next place). The sensibility deepens those; it isn't a new gimmick.
+4. **Still A2.** If a reflective line needs "fancier" French to work, it's the wrong line — find the
+   plainer sentence that carries the same noticing.
+
 ---
 
 ## 3. Itinerary log (continuity — keep it plausible & overland)
