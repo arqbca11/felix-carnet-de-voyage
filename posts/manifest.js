@@ -20,4 +20,5 @@ window.FELIX_MANIFEST = [
   { id:'blidinje',  file:'posts/07-blidinje.js',  date:'2026-06-21' },
   { id:'sutjeska',  file:'posts/08-sutjeska.js',  date:'2026-06-28' },
   { id:'lofoten',   file:'posts/09-lofoten.js',   date:'2026-07-05' },
+  { id:'abisko',    file:'posts/10-abisko.js',    date:'2026-07-12' },
 ];

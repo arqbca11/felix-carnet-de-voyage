@@ -89,6 +89,7 @@ transparent vocabulary); the sensibility lives in the observation, not the synta
 | 7 | 21 Jun 2026 | Blidinje (plateau, Čvrsnica/Vran) | Bosnie-Herzégovine 🇧🇦 | Rope away — multi-day **walk** across the high plateau; shepherds; medieval *stećci* | 43.6333, 17.5167 |
 | 8 | 28 Jun 2026 | Sutjeska / Maglić (nr Foča) | Bosnie-Herzégovine 🇧🇦 | Perućica primeval forest w/ guide; ascent of **Maglić** (2386 m, highest in BiH), chained finish | 43.3083, 18.6889 |
 | 9 | 5 Jul 2026 | Lofoten (Henningsvær / Svolvær) | Norvège 🇳🇴 | **Flight north** (escaping the Balkan heat); midnight sun; granite sea-cliff climbing + sea kayaking | 68.1530, 14.2039 |
+| 10 | 12 Jul 2026 | Abisko / Kungsleden (Laponie) | Suède 🇸🇪 | Boat + train back overland; 7-day solo **trek** on the King's Trail; Sámi herder, reindeer, *Lapporten* | 68.3494, 18.8303 |
 
 > **Continuity note (week 9):** this is the one deliberate non-overland jump — a *flight*, acknowledged
 > in-text ("j'ai pris l'avion… le Monténégro attendra"), made on the reader's request to chase summer
@@ -100,12 +101,14 @@ Anže (Slovenian rafting guide); Damjan (Piran fisherman); Davor (Istrian truffl
 Ivana (Croatian climber, knows the Paklenica walls by heart, leads Anića Kuk);
 Mirko (old Blidinje shepherd, no shared language but understood anyway);
 Goran (Sutjeska forest guide, speaks low under the old trees);
-Lars (Lofoten fisherman, lent Felix a kayak, grilled fish at midnight).
+Lars (Lofoten fisherman, lent Felix a kayak, grilled fish at midnight);
+Niila (Sámi reindeer herder on the Kungsleden — his family has followed the herds there for a thousand years).
 
-**Next, teased:** boat + train east into **Laponie suédoise** (Swedish Lapland — Abisko / the
-*Kungsleden*; still under the midnight sun, empty trails), named at the end of week 9. A return to
-**overland** pacing and a multi-day trek. Montenegro/Durmitor remains available for later. Keep the
-Bouvier/Saint-Exupéry register (§2a) to the 1–2 earned lines per post.
+**Next, teased:** south to the **grands lacs de Suède** (Swedish lakeland — e.g. Dalsland) for a
+change of mode after the long walk: **canoe + tent**, calm water, "le temps de ne rien faire" — named
+at the end of week 10. Realistic overland (train south). A return to paddling (his established skill).
+Montenegro/Durmitor remains available for later. Keep the Bouvier/Saint-Exupéry register (§2a) to the
+1–2 earned lines per post.
 
 ---
 
