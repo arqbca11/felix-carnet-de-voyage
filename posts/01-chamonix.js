@@ -5,6 +5,7 @@ FelixBlog.register({
   id:'chamonix', no:1, place:'Chamonix', country:'France', flag:'🇫🇷',
   date:'le 10 mai 2026', lat:45.9237, lng:6.8694,
   title:'Trois jours sur les glaciers', titleEn:'Three days on the glaciers',
+  level:'mid A2',
   fr:[
     "Ça y est, je suis parti ! Pour commencer mon voyage, je voulais un endroit qui compte vraiment pour moi : Chamonix. Ma mère est née ici, et c'est mon grand-père qui m'a mis des skis aux pieds, il y a vingt ans. Aujourd'hui, je connais ces montagnes presque par cœur.",
     "En mai, la neige de printemps est parfaite pour le ski de randonnée. J'ai donc fait une traversée de trois jours, de refuge en refuge, sur les glaciers au-dessus de la vallée. Chaque matin, je collais les peaux sous mes skis et je montais pendant des heures, dans le silence total. Sur le glacier, on était encordés, parce qu'il y a des crevasses cachées sous la neige.",

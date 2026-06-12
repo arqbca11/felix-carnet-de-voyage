@@ -66,8 +66,27 @@
   /* LAYOUT */
   .layout{max-width:1340px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:36px;align-items:start;}
   .feed{padding:28px 0 90px;min-width:0;}
-  .map-rail{position:sticky;top:24px;align-self:start;padding-top:28px;}
-  .map-box{display:flex;flex-direction:column;height:calc(100vh - 130px);max-height:760px;min-height:500px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);box-shadow:0 16px 40px -30px rgba(0,0,0,.5);position:relative;}
+  .map-rail{position:sticky;top:24px;align-self:start;padding-top:28px;display:flex;flex-direction:column;gap:14px;}
+  .map-box{display:flex;flex-direction:column;height:calc(100vh - 250px);max-height:640px;min-height:420px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);box-shadow:0 16px 40px -30px rgba(0,0,0,.5);position:relative;}
+
+  /* CALENDAR */
+  .cal{flex:0 0 auto;border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:12px 14px 13px;box-shadow:0 16px 40px -34px rgba(0,0,0,.5);}
+  .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;}
+  .cal-title{font-size:13px;font-weight:600;color:var(--ink);text-transform:capitalize;letter-spacing:.2px;}
+  .cal-nav{width:26px;height:26px;border:1px solid var(--line-2);border-radius:8px;background:var(--surface);color:var(--ink-soft);font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+  .cal-nav:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
+  .cal-nav:disabled{opacity:.32;cursor:default;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+  .cal-dow{font-size:10px;font-weight:600;letter-spacing:.5px;color:var(--muted);text-align:center;padding:2px 0 4px;}
+  .cal-day{position:relative;aspect-ratio:1;border:none;background:transparent;border-radius:8px;font-family:'Schibsted Grotesk',sans-serif;font-size:12.5px;color:var(--ink-soft);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .14s,color .14s;}
+  .cal-day:hover{background:var(--accent-wash);color:var(--accent-deep);}
+  .cal-day.empty{visibility:hidden;cursor:default;}
+  .cal-day.has-post{font-weight:600;color:var(--ink);}
+  .cal-day.has-post::after{content:"";position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--accent);}
+  .cal-day.selected{background:var(--accent);color:#fff;font-weight:600;}
+  .cal-day.selected::after{background:#fff;}
+  .cal-cap{margin-top:10px;font-size:11px;line-height:1.45;color:var(--muted);font-family:'Newsreader',serif;font-style:italic;}
+  .cal-cap b{font-style:normal;font-weight:600;color:var(--ink-soft);}
   .map-cap{flex:0 0 auto;padding:11px 16px;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);background:var(--surface);}
   #map{flex:1 1 auto;width:100%;min-height:0;background:var(--wash);}
   .map-close{display:none;position:absolute;top:9px;right:10px;z-index:5;background:var(--surface);border:1px solid var(--line-2);border-radius:8px;padding:6px 11px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;font-family:'Schibsted Grotesk',sans-serif;}
@@ -87,6 +106,9 @@
     background:var(--accent-wash);color:var(--accent-deep);font-size:12.5px;font-weight:700;flex-shrink:0;}
   .place{font-weight:600;color:var(--ink-soft);}
   .dot{color:var(--line-2);}
+  .level-tag{margin-left:auto;flex-shrink:0;font-size:11px;font-weight:600;letter-spacing:.3px;
+    padding:3px 10px;border-radius:999px;background:var(--accent-wash);color:var(--accent-deep);
+    border:1px solid var(--line);white-space:nowrap;}
   .post h2{font-family:'Newsreader',serif;font-weight:500;font-size:30px;line-height:1.12;letter-spacing:-.3px;margin:0 0 4px;color:var(--ink);}
   .post h2 .en-title{display:block;font-family:'Schibsted Grotesk',sans-serif;font-size:13.5px;color:var(--muted);font-weight:400;letter-spacing:.2px;margin-top:7px;}
   .post-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px;}
@@ -136,6 +158,8 @@
     padding:13px 21px;font-family:'Schibsted Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;
     box-shadow:0 10px 26px -8px rgba(26,115,255,.5);display:none;align-items:center;gap:8px;}
 
+  .empty-feed{background:var(--surface);border:1px dashed var(--line-2);border-radius:16px;padding:48px 28px;text-align:center;color:var(--muted);font-family:'Newsreader',serif;font-style:italic;font-size:17px;}
+
   .footer{text-align:center;padding:34px 20px 44px;color:var(--muted);font-size:13px;font-family:'Newsreader',serif;font-style:italic;}
 
   /* MARKER */
@@ -155,9 +179,10 @@
     .readzone{padding:0 18px;}
     .layout{grid-template-columns:1fr;padding:0 18px;gap:0;}
     .feed{padding:26px 0 80px;}
-    .map-rail{position:fixed;inset:0;z-index:1000;padding-top:0;transform:translateX(100%);transition:transform .3s ease;}
+    .map-rail{position:fixed;inset:0;z-index:1000;padding:12px 12px 12px;gap:12px;background:var(--bg);transform:translateX(100%);transition:transform .3s ease;}
     .map-rail.open{transform:none;}
-    .map-box{height:100%;max-height:none;border-radius:0;border:none;box-shadow:none;}
+    .cal{border-radius:14px;}
+    .map-box{flex:1 1 auto;min-height:0;max-height:none;border-radius:14px;}
     .map-close{display:block;}
     .map-toggle{display:flex;}
     .post.split{grid-template-columns:1fr;}
@@ -213,6 +238,7 @@
 <div class="layout">
   <main class="feed" id="feed"></main>
   <aside class="map-rail" id="mapCol">
+    <div class="cal" id="cal"></div>
     <div class="map-box">
       <div class="map-cap">Itinéraire</div>
       <button class="map-close" onclick="toggleMap(false)">✕</button>
@@ -232,27 +258,46 @@
    registers itself by calling FelixBlog.register(...). The loader below pulls the
    LATEST THREE entries from posts/manifest.js and injects only those scripts, so
    only three weeks are ever shown. See CLAUDE.md §5–§7. */
-const POSTS = [];                         // filled by FelixBlog.register at load time
+let POSTS = [];                           // the three weeks CURRENTLY displayed (rebuilt on date change)
+const POST_BY_ID = {};                    // id -> post object, filled by FelixBlog.register
+const LOADED_FILES = new Set();           // post files already injected (never inject twice)
 const HOW_MANY = 3;                       // how many of the latest weeks to display
 
 window.FelixBlog = {
-  register(post){ POSTS.push(post); }
+  register(post){ POST_BY_ID[post.id] = post; }
 };
 
-// Inject the <script> tags for the latest N posts, then run `done` once all settle.
-// Uses dynamic <script> tags (NOT fetch) so the page works opened directly via file://.
-function loadPosts(done){
+// Which manifest entries to show "as of" a given ISO day: the latest three with date <= cutoff.
+function entriesUpTo(cutoffISO){
   const manifest = Array.isArray(window.FELIX_MANIFEST) ? window.FELIX_MANIFEST : [];
-  const latest = manifest.slice(-HOW_MANY);        // manifest is chronological; tail = newest
-  if(!latest.length){ done(); return; }
-  let pending = latest.length;
-  const settle = () => { if(--pending === 0){ POSTS.sort((a,b)=>a.no-b.no); done(); } };
-  latest.forEach(entry => {
+  return manifest.filter(e => e.date <= cutoffISO).slice(-HOW_MANY);
+}
+
+// Ensure the given manifest entries' scripts are loaded, then run `done`.
+// Uses dynamic <script> tags (NOT fetch) so the page works opened directly via file://.
+function ensureLoaded(entries, done){
+  const todo = entries.filter(e => !LOADED_FILES.has(e.file));
+  if(!todo.length){ done(); return; }
+  let pending = todo.length;
+  const settle = () => { if(--pending === 0) done(); };
+  todo.forEach(entry => {
+    LOADED_FILES.add(entry.file);
     const s = document.createElement('script');
     s.src = entry.file;
     s.onload = settle;
-    s.onerror = () => { console.error('Could not load post:', entry.file); settle(); };
+    s.onerror = () => { console.error('Could not load post:', entry.file); LOADED_FILES.delete(entry.file); settle(); };
     document.head.appendChild(s);
+  });
+}
+
+// Load (if needed) and render the three weeks shown "as of" cutoffISO. Re-entrant.
+function showAsOf(cutoffISO){
+  const entries = entriesUpTo(cutoffISO);
+  ensureLoaded(entries, () => {
+    stopAll();
+    POSTS = entries.map(e => POST_BY_ID[e.id]).filter(Boolean).sort((a,b)=>a.no-b.no);
+    buildFeed();
+    drawRoute();
   });
 }
 
@@ -268,7 +313,13 @@ function setLS(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
 
 // ── BUILD FEED ──
 const feed = document.getElementById('feed');
-function buildFeed(){ POSTS.forEach(post => {
+function buildFeed(){
+  feed.innerHTML = '';
+  if(!POSTS.length){
+    feed.innerHTML = '<div class="empty-feed">Aucun article à cette date — Felix n\'avait pas encore commencé son voyage.</div>';
+    return;
+  }
+  POSTS.forEach(post => {
   const card = document.createElement('article');
   card.className = 'post'; card.id = post.id;
 
@@ -284,6 +335,7 @@ function buildFeed(){ POSTS.forEach(post => {
         <span class="stop-no">${post.no}</span>
         <span class="place">${post.flag} ${post.place}, ${post.country}</span>
         <span class="dot">·</span><span>${post.date}</span>
+        ${post.level ? `<span class="level-tag">${post.level}</span>` : ''}
       </div>
       <h2>${post.title}<span class="en-title">${post.titleEn}</span></h2>
       <div class="post-actions">
@@ -497,7 +549,7 @@ function renderVoicePicker(){
 }
 
 // ── MAP ──
-let map, markers = {};
+let map, markers = {}, routeLine = null;
 function makeIcon(no, active){
   return L.divIcon({className:'', html:`<div class="pin${active?' active':''}"><span>${no}</span></div>`,
     iconSize:[28,28], iconAnchor:[14,28], popupAnchor:[0,-28]});
@@ -505,6 +557,13 @@ function makeIcon(no, active){
 function initMap(){
   map = L.map('map', {scrollWheelZoom:true, zoomControl:true});
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18, attribution:'© OSM'}).addTo(map);
+}
+// (Re)draw the markers + route for the currently displayed POSTS. Safe to call on every date change.
+function drawRoute(){
+  if(!map) return;
+  Object.values(markers).forEach(m => map.removeLayer(m));
+  markers = {};
+  if(routeLine){ map.removeLayer(routeLine); routeLine = null; }
   const pts = [];
   POSTS.forEach(p => {
     const m = L.marker([p.lat, p.lng], {icon: makeIcon(p.no,false)}).addTo(map);
@@ -512,9 +571,9 @@ function initMap(){
     m.on('click', () => { document.getElementById(p.id).scrollIntoView(); highlight(p.id); });
     markers[p.id] = m; pts.push([p.lat, p.lng]);
   });
-  L.polyline(pts, {color:'#1a73ff', weight:2, dashArray:'2 8', opacity:.75}).addTo(map);
+  routeLine = L.polyline(pts, {color:'#1a73ff', weight:2, dashArray:'2 8', opacity:.75}).addTo(map);
   if(pts.length) map.fitBounds(pts, {padding:[35,35]});
-  else map.setView([46, 12], 5);                 // fallback if no posts loaded
+  else map.setView([46, 12], 5);                 // fallback if no posts in range
   setTimeout(() => map.invalidateSize(), 60);
 }
 function highlight(id){
@@ -532,12 +591,80 @@ function toggleMap(open){
   if (open) setTimeout(() => map.invalidateSize(), 120);
 }
 
+// ── CALENDAR ──
+// A small month picker above the map. Clicking a day shows the latest three weeks
+// published on or before that day (entriesUpTo + showAsOf). Days with a post get a dot.
+const MONTHS_FR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const DOW_FR = ['L','M','M','J','V','S','D'];
+let calY, calM, selISO, calMin = 0, calMax = 0;   // shown month, selected ISO day, nav bounds (year*12+month)
+
+function manifestDates(){
+  const m = Array.isArray(window.FELIX_MANIFEST) ? window.FELIX_MANIFEST : [];
+  return new Set(m.map(e => e.date));
+}
+function isoOf(y,mo,d){ return `${y}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+function frLong(isoStr){ const [y,mo,d]=isoStr.split('-').map(Number); return `${d} ${MONTHS_FR[mo-1]} ${y}`; }
+
+function setupCalendar(){
+  const m = Array.isArray(window.FELIX_MANIFEST) ? window.FELIX_MANIFEST : [];
+  const dates = m.map(e => e.date).filter(Boolean).sort();
+  const firstISO = dates[0] || isoOf(2026,0,1);
+  const lastISO  = dates[dates.length-1] || firstISO;
+  const [fy,fm] = firstISO.split('-').map(Number);
+  const [ly,lm] = lastISO.split('-').map(Number);
+  calMin = fy*12 + (fm-1);
+  calMax = ly*12 + (lm-1);
+  selISO = lastISO;            // default selection = newest day → opens on the latest three (as before)
+  calY = ly; calM = lm-1;
+  renderCalendar();
+}
+function renderCalendar(){
+  const cal = document.getElementById('cal'); if(!cal) return;
+  const dates = manifestDates();
+  const monthIdx = calY*12 + calM;
+  const firstDow = (new Date(calY,calM,1).getDay()+6) % 7;   // Monday-first column
+  const daysInMonth = new Date(calY,calM+1,0).getDate();
+  const dow = DOW_FR.map(d => `<span class="cal-dow">${d}</span>`).join('');
+  let days = '';
+  for(let i=0;i<firstDow;i++) days += '<button class="cal-day empty" disabled></button>';
+  for(let d=1; d<=daysInMonth; d++){
+    const iso = isoOf(calY,calM,d);
+    const cls = ['cal-day'];
+    if(dates.has(iso)) cls.push('has-post');
+    if(iso===selISO) cls.push('selected');
+    days += `<button class="${cls.join(' ')}" data-day="${iso}">${d}</button>`;
+  }
+  cal.innerHTML = `
+    <div class="cal-head">
+      <button class="cal-nav" data-cal="prev"${monthIdx<=calMin?' disabled':''}>‹</button>
+      <div class="cal-title">${MONTHS_FR[calM]} ${calY}</div>
+      <button class="cal-nav" data-cal="next"${monthIdx>=calMax?' disabled':''}>›</button>
+    </div>
+    <div class="cal-grid">${dow}${days}</div>
+    <div class="cal-cap">Les 3 derniers articles jusqu'au <b>${frLong(selISO)}</b>.</div>`;
+}
+document.getElementById('cal').addEventListener('click', e => {
+  const nav = e.target.closest('[data-cal]');
+  if(nav){
+    const monthIdx = calY*12 + calM;
+    if(nav.dataset.cal==='prev' && monthIdx>calMin){ calM--; if(calM<0){ calM=11; calY--; } }
+    if(nav.dataset.cal==='next' && monthIdx<calMax){ calM++; if(calM>11){ calM=0; calY++; } }
+    renderCalendar();
+    return;
+  }
+  const day = e.target.closest('[data-day]');
+  if(day){
+    selISO = day.dataset.day;
+    renderCalendar();
+    showAsOf(selISO);
+  }
+});
+
 // ── INIT ──
 window.addEventListener('load', () => {
-  loadPosts(() => {            // pull the latest three weeks from posts/, then render
-    buildFeed();
-    initMap();
-  });
+  initMap();                  // create the Leaflet map once
+  setupCalendar();            // render the picker (selects the newest day by default)
+  showAsOf(selISO);           // load + render the latest three weeks as of that day
   const s=parseFloat(getLS(KEY_SPEED)); if(!isNaN(s)) speed=s;
   if(window.speechSynthesis) speechSynthesis.getVoices();
   const key=getLS(KEY_API);

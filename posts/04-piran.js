@@ -5,6 +5,7 @@ FelixBlog.register({
   id:'piran', no:4, place:'Piran', country:'Slovénie', flag:'🇸🇮',
   date:'le 31 mai 2026', lat:45.5288, lng:13.5683,
   title:'Piran, enfin la mer', titleEn:'Piran, the sea at last',
+  level:'mid A2',
   fr:[
     "Bonjour de la mer ! Après une semaine dans les montagnes, j'ai pris le bus jusqu'à Piran. Quel changement : on quitte les vallées étroites pour de longues plages blanches et une lumière éblouissante. La Slovénie n'a qu'une petite côte, à peine cinquante kilomètres, mais Piran y est posée comme un bijou — un petit village vénitien sur un cap, avec de grandes maisons aux volets clos contre le soleil.",
     "J'ai loué un kayak de mer pour quatre jours. Au début, c'était bizarre : la mer ne ressemble pas à la Soča. Sur une rivière, on suit le courant ; sur la mer, on choisit sa direction — mais c'est souvent le vent qui décide. J'ai longé les falaises de Strunjan, puis tourné autour du cap Madona. Quand on glisse sur une eau calme, on n'entend que la pagaie et les goélands.",

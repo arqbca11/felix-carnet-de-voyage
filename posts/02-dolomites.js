@@ -5,6 +5,7 @@ FelixBlog.register({
   id:'dolomites', no:2, place:'Les Dolomites', country:'Italie', flag:'🇮🇹',
   date:'le 17 mai 2026', lat:46.5369, lng:12.1357,
   title:'Grande voie sur la Cima Grande', titleEn:'A big route on the Cima Grande',
+  level:'mid A2',
   fr:[
     "Bonjour de l'Italie ! Après les skis, place au rocher. Les Dolomites, c'est un rêve pour tous les grimpeurs : des centaines de mètres de calcaire vertical, jaune et gris, avec des voies ouvertes il y a presque cent ans.",
     "Je grimpe depuis l'adolescence, alors je n'allais pas rester en bas. J'ai retrouvé Marco, un vieil ami italien et excellent grimpeur. Ensemble, nous avons fait une grande voie sur la Cima Grande : dix longueurs, presque cinq cents mètres de haut.",

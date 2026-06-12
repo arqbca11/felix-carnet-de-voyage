@@ -5,6 +5,7 @@ FelixBlog.register({
   id:'soca', no:3, place:'Vallée de la Soča', country:'Slovénie', flag:'🇸🇮',
   date:'le 24 mai 2026', lat:46.3375, lng:13.5526,
   title:'Rafting sur la Soča', titleEn:'Rafting on the Soča',
+  level:'hard A2',
   fr:[
     "Salut à tous ! En Slovénie, j'ai troqué la corde contre une pagaie. La vallée de la Soča est célèbre pour une chose : ses rapides. L'eau de la rivière a une couleur incroyable, un vert turquoise — mais ne vous fiez pas à sa beauté, elle est puissante et glaciale.",
     "J'ai déjà fait du rafting, en France et au Népal, donc j'étais à l'aise. Je me suis joint à une équipe de six personnes, avec un guide local, Anže. Avant de partir, il nous a expliqué les ordres : « En avant ! », « Stop ! », « À gauche ! ». Sur l'eau, tout va très vite : il faut écouter et pagayer ensemble, sinon le raft tourne.",

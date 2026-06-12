@@ -86,14 +86,26 @@ transparent vocabulary); the sensibility lives in the observation, not the synta
 | 4 | 31 May 2026 | Piran | Slovénie 🇸🇮 | Sea kayaking the Adriatic coast; old town + salt pans | 45.5288, 13.5683 |
 | 5 | 7 Jun 2026 | Istrie (Poreč → Motovun → Pula / Cap Kamenjak) | Croatie 🇭🇷 | Parenzana cycle path through the hills + sea kayaking the wild south coast | 45.0811, 13.6387 |
 | 6 | 14 Jun 2026 | Paklenica (Velebit / Anića Kuk, nr Starigrad) | Croatie 🇭🇷 | Multi-pitch rock on the big wall Anića Kuk w/ Ivana; sport routes; the *bura* wind | 44.3346, 15.4622 |
+| 7 | 21 Jun 2026 | Blidinje (plateau, Čvrsnica/Vran) | Bosnie-Herzégovine 🇧🇦 | Rope away — multi-day **walk** across the high plateau; shepherds; medieval *stećci* | 43.6333, 17.5167 |
+| 8 | 28 Jun 2026 | Sutjeska / Maglić (nr Foča) | Bosnie-Herzégovine 🇧🇦 | Perućica primeval forest w/ guide; ascent of **Maglić** (2386 m, highest in BiH), chained finish | 43.3083, 18.6889 |
+| 9 | 5 Jul 2026 | Lofoten (Henningsvær / Svolvær) | Norvège 🇳🇴 | **Flight north** (escaping the Balkan heat); midnight sun; granite sea-cliff climbing + sea kayaking | 68.1530, 14.2039 |
+
+> **Continuity note (week 9):** this is the one deliberate non-overland jump — a *flight*, acknowledged
+> in-text ("j'ai pris l'avion… le Monténégro attendra"), made on the reader's request to chase summer
+> light north. The Montenegro/Durmitor tease is parked, not dropped. Don't make air-travel a habit;
+> from Lofoten onward, return to realistic overland hops (boat + train into Swedish Lapland).
 
 **Recurring side characters:** Marco (Italian mountain guide, ~50, old friend, equal climber);
 Anže (Slovenian rafting guide); Damjan (Piran fisherman); Davor (Istrian truffle hunter, calm, two dogs);
-Ivana (Croatian climber, knows the Paklenica walls by heart, leads Anića Kuk).
+Ivana (Croatian climber, knows the Paklenica walls by heart, leads Anića Kuk);
+Mirko (old Blidinje shepherd, no shared language but understood anyway);
+Goran (Sutjeska forest guide, speaks low under the old trees);
+Lars (Lofoten fisherman, lent Felix a kayak, grilled fish at midnight).
 
-**Next, teased:** east into **Bosnia** — and a change of mode: Felix puts the rope away to **walk**
-several days (a multi-day trek; slow-travel, Bouvier register). Keep the overland hop east realistic.
-First post to fold in the §2a reflective sensibility (Saint-Exupéry on the rope; the wordless summit).
+**Next, teased:** boat + train east into **Laponie suédoise** (Swedish Lapland — Abisko / the
+*Kungsleden*; still under the midnight sun, empty trails), named at the end of week 9. A return to
+**overland** pacing and a multi-day trek. Montenegro/Durmitor remains available for later. Keep the
+Bouvier/Saint-Exupéry register (§2a) to the 1–2 earned lines per post.
 
 ---
 
@@ -177,6 +189,7 @@ FelixBlog.register({
   date:'le 24 mai 2026',
   lat:46.3375, lng:13.5526,
   title:'Rafting sur la Soča', titleEn:'Rafting on the Soča',
+  level:'hard A2',                  // small difficulty tag shown on the card (e.g. 'mid A2','hard A2','easy B1')
   fr:[ "...", ... ],               // ~5 paragraphs, ~280–320 words total, solid A2
   en:[ "...", ... ],               // 1:1 paragraph translation (same length array)
   vocab:[ ['mot fr','english gloss'], ... ],   // ~12 entries

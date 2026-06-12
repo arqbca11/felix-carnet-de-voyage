@@ -5,6 +5,7 @@ FelixBlog.register({
   id:'istrie', no:5, place:'Istrie', country:'Croatie', flag:'🇭🇷',
   date:'le 7 juin 2026', lat:45.0811, lng:13.6387,
   title:'L\'Istrie, des collines à la mer', titleEn:'Istria, from the hills to the sea',
+  level:'hard A2',
   fr:[
     "Salut à tous ! J'ai passé la frontière et je suis entré en Croatie, en Istrie. Le changement est petit mais réel : les panneaux changent, le café devient un peu plus fort, et la mer reste toujours là, à droite. À Poreč, j'ai loué un vélo pour plusieurs jours. Je voulais suivre la Parenzana, une ancienne voie ferrée devenue une piste cyclable. Le train ne roule plus depuis presque cent ans, mais les tunnels et les ponts, eux, sont toujours là.",
     "Pendant deux jours, j'ai roulé vers l'intérieur, loin de la côte. Le paysage montait doucement : de petits villages en pierre, des vignes, des forêts, et partout cette terre rouge typique de l'Istrie. La Parenzana traverse de vieux tunnels, tout noirs et frais — on entre en plein soleil et on ressort dans le froid. Je montais sans me presser, parce que la vue méritait qu'on s'arrête. Au sommet d'une colline, une ville m'attendait : Motovun.",

@@ -7,6 +7,7 @@ FelixBlog.register({
   id:'paklenica', no:6, place:'Paklenica', country:'Croatie', flag:'🇭🇷',
   date:'le 14 juin 2026', lat:44.3346, lng:15.4622,
   title:'Anića Kuk, longueur après longueur', titleEn:'Anića Kuk, pitch after pitch',
+  level:'easy B1',
   fr:[
     "Salut à tous ! J'ai quitté la mer et j'ai roulé vers le sud, le long de la côte, jusqu'au pied du Velebit. Ici, la montagne tombe directement dans l'Adriatique : d'un côté l'eau bleue, de l'autre de grands murs de pierre grise. Le parc de Paklenica, ce sont deux canyons étroits, pleins de voies d'escalade. J'attendais ce moment depuis des semaines : enfin du vrai rocher, et de longues voies.",
     "Les premiers jours, j'ai grimpé des voies courtes pour retrouver mes sensations. Le calcaire de Paklenica est magnifique : dur, gris, plein de petites prises franches. Le vent, lui, est moins gentil — ici, on l'appelle la bura, et il descend de la montagne par rafales froides. Le soir, au camping, tout le monde parlait d'escalade, dans cinq langues à la fois. C'est là que j'ai rencontré Ivana, une grimpeuse croate qui connaît ces parois par cœur.",
