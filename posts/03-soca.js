@@ -21,9 +21,25 @@ FelixBlog.register({
     "Next time, a complete change of scene: I'm heading down to the sea. Bring on the sun and the salt! See you soon!"
   ],
   vocab:[
-    ['une pagaie','a paddle'],['pagayer','to paddle'],['les rapides','the rapids'],
+    ['une pagaie','a paddle'],
+    ['pagayer','to paddle', FelixBlog.verb('pagayer',
+      ["je pagaie","tu pagaies","il/elle pagaie","nous pagayons","vous pagayez","ils/elles pagaient"],
+      ["j'ai pagayé","tu as pagayé","il/elle a pagayé","nous avons pagayé","vous avez pagayé","ils/elles ont pagayé"],
+      ["je pagayais","tu pagayais","il/elle pagayait","nous pagayions","vous pagayiez","ils/elles pagayaient"],
+      ["je pagaierai","tu pagaieras","il/elle pagaiera","nous pagaierons","vous pagaierez","ils/elles pagaieront"])],
+    ['les rapides','the rapids'],
     ['puissant(e)','powerful'],['une équipe','a team'],['un ordre','an order, a command'],
-    ['un gilet (de sauvetage)','a (life) jacket'],['tomber à l\'eau','to fall into the water'],['attraper','to grab, to catch'],
+    ['un gilet (de sauvetage)','a (life) jacket'],
+    ['tomber à l\'eau','to fall into the water', FelixBlog.verb('tomber à l\'eau',
+      ["je tombe à l'eau","tu tombes à l'eau","il/elle tombe à l'eau","nous tombons à l'eau","vous tombez à l'eau","ils/elles tombent à l'eau"],
+      ["je suis tombé(e) à l'eau","tu es tombé(e) à l'eau","il/elle est tombé(e) à l'eau","nous sommes tombé(e)s à l'eau","vous êtes tombé(e)(s) à l'eau","ils/elles sont tombé(e)s à l'eau"],
+      ["je tombais à l'eau","tu tombais à l'eau","il/elle tombait à l'eau","nous tombions à l'eau","vous tombiez à l'eau","ils/elles tombaient à l'eau"],
+      ["je tomberai à l'eau","tu tomberas à l'eau","il/elle tombera à l'eau","nous tomberons à l'eau","vous tomberez à l'eau","ils/elles tomberont à l'eau"])],
+    ['attraper','to grab, to catch', FelixBlog.verb('attraper',
+      ["j'attrape","tu attrapes","il/elle attrape","nous attrapons","vous attrapez","ils/elles attrapent"],
+      ["j'ai attrapé","tu as attrapé","il/elle a attrapé","nous avons attrapé","vous avez attrapé","ils/elles ont attrapé"],
+      ["j'attrapais","tu attrapais","il/elle attrapait","nous attrapions","vous attrapiez","ils/elles attrapaient"],
+      ["j'attraperai","tu attraperas","il/elle attrapera","nous attraperons","vous attraperez","ils/elles attraperont"])],
     ['en avant','forward'],['le sourire','the smile'],['une sensation','a feeling, a sensation']
   ],
   gram:[

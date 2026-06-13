@@ -26,8 +26,19 @@ FelixBlog.register({
   vocab:[
     ['le soleil de minuit','the midnight sun'],['le cercle polaire','the Arctic Circle'],['une île','an island'],
     ['le granit','granite'],['un pêcheur','a fisherman'],['un port','a harbour, a port'],
-    ['rugueux','rough (to the touch)'],['se baigner','to take a dip'],['glacial','freezing, icy'],
-    ['un galet','a pebble (smooth stone)'],['le sable','sand'],['griller','to grill']
+    ['rugueux','rough (to the touch)'],
+    ['se baigner','to take a dip', FelixBlog.verb('se baigner',
+      ["je me baigne","tu te baignes","il/elle se baigne","nous nous baignons","vous vous baignez","ils/elles se baignent"],
+      ["je me suis baigné(e)","tu t'es baigné(e)","il/elle s'est baigné(e)","nous nous sommes baigné(e)s","vous vous êtes baigné(e)(s)","ils/elles se sont baigné(e)s"],
+      ["je me baignais","tu te baignais","il/elle se baignait","nous nous baignions","vous vous baigniez","ils/elles se baignaient"],
+      ["je me baignerai","tu te baigneras","il/elle se baignera","nous nous baignerons","vous vous baignerez","ils/elles se baigneront"])],
+    ['glacial','freezing, icy'],
+    ['un galet','a pebble (smooth stone)'],['le sable','sand'],
+    ['griller','to grill', FelixBlog.verb('griller',
+      ["je grille","tu grilles","il/elle grille","nous grillons","vous grillez","ils/elles grillent"],
+      ["j'ai grillé","tu as grillé","il/elle a grillé","nous avons grillé","vous avez grillé","ils/elles ont grillé"],
+      ["je grillais","tu grillais","il/elle grillait","nous grillions","vous grilliez","ils/elles grillaient"],
+      ["je grillerai","tu grilleras","il/elle grillera","nous grillerons","vous grillerez","ils/elles grilleront"])]
   ],
   gram:[
     {h:'The keystone, far north: <em>passé composé</em> vs <em>imparfait</em>',

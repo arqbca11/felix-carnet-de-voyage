@@ -23,7 +23,13 @@ FelixBlog.register({
   vocab:[
     ['la côte','the coast'],['une plage','a beach'],['un kayak de mer','a sea kayak'],
     ['une falaise','a cliff'],['un cap','a cape, a headland'],['un goéland','a (sea)gull'],
-    ['une saline','a salt pan'],['récolter','to harvest'],['le Moyen Âge','the Middle Ages'],
+    ['une saline','a salt pan'],
+    ['récolter','to harvest', FelixBlog.verb('récolter',
+      ["je récolte","tu récoltes","il/elle récolte","nous récoltons","vous récoltez","ils/elles récoltent"],
+      ["j'ai récolté","tu as récolté","il/elle a récolté","nous avons récolté","vous avez récolté","ils/elles ont récolté"],
+      ["je récoltais","tu récoltais","il/elle récoltait","nous récoltions","vous récoltiez","ils/elles récoltaient"],
+      ["je récolterai","tu récolteras","il/elle récoltera","nous récolterons","vous récolterez","ils/elles récolteront"])],
+    ['le Moyen Âge','the Middle Ages'],
     ['une ruelle','a narrow alley'],['un volet','a shutter'],['un pêcheur','a fisherman']
   ],
   gram:[

@@ -24,7 +24,17 @@ FelixBlog.register({
     ['le rocher','rock'],['un grimpeur','a climber'],['une voie','a route'],
     ['le calcaire','limestone'],['une longueur','a pitch'],['une prise','a hold'],
     ['une protection','protection (gear)'],['le vide','exposure, the void'],['une vire','a ledge'],
-    ['un orage','a thunderstorm'],['redescendre','to come back down'],['fêter','to celebrate']
+    ['un orage','a thunderstorm'],
+    ['redescendre','to come back down', FelixBlog.verb('redescendre',
+      ["je redescends","tu redescends","il/elle redescend","nous redescendons","vous redescendez","ils/elles redescendent"],
+      ["je suis redescendu(e)","tu es redescendu(e)","il/elle est redescendu(e)","nous sommes redescendu(e)s","vous êtes redescendu(e)(s)","ils/elles sont redescendu(e)s"],
+      ["je redescendais","tu redescendais","il/elle redescendait","nous redescendions","vous redescendiez","ils/elles redescendaient"],
+      ["je redescendrai","tu redescendras","il/elle redescendra","nous redescendrons","vous redescendrez","ils/elles redescendront"])],
+    ['fêter','to celebrate', FelixBlog.verb('fêter',
+      ["je fête","tu fêtes","il/elle fête","nous fêtons","vous fêtez","ils/elles fêtent"],
+      ["j'ai fêté","tu as fêté","il/elle a fêté","nous avons fêté","vous avez fêté","ils/elles ont fêté"],
+      ["je fêtais","tu fêtais","il/elle fêtait","nous fêtions","vous fêtiez","ils/elles fêtaient"],
+      ["je fêterai","tu fêteras","il/elle fêtera","nous fêterons","vous fêterez","ils/elles fêteront"])]
   ],
   gram:[
     {h:'The <em>imparfait</em> for description & background',

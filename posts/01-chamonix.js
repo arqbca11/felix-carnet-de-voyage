@@ -23,7 +23,12 @@ FelixBlog.register({
   vocab:[
     ['le ski de randonnée','ski touring'],['les peaux','climbing skins'],['une crevasse','a crevasse'],
     ['encordé(e)','roped up'],['un glacier','a glacier'],['un refuge','a mountain hut'],
-    ['une pente','a slope'],['raide','steep'],['glisser','to slip, to slide'],
+    ['une pente','a slope'],['raide','steep'],
+    ['glisser','to slip, to slide', FelixBlog.verb('glisser',
+      ["je glisse","tu glisses","il/elle glisse","nous glissons","vous glissez","ils/elles glissent"],
+      ["j'ai glissé","tu as glissé","il/elle a glissé","nous avons glissé","vous avez glissé","ils/elles ont glissé"],
+      ["je glissais","tu glissais","il/elle glissait","nous glissions","vous glissiez","ils/elles glissaient"],
+      ["je glisserai","tu glisseras","il/elle glissera","nous glisserons","vous glisserez","ils/elles glisseront"])],
     ['une descente','a descent'],['une récompense','a reward'],['par cœur','by heart']
   ],
   gram:[

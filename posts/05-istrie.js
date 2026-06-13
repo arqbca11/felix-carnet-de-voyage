@@ -23,7 +23,12 @@ FelixBlog.register({
   vocab:[
     ['la frontière','the border'],['une piste cyclable','a cycle path'],['une voie ferrée','a railway line'],
     ['un tunnel','a tunnel'],['une colline','a hill'],['une vigne','a vine, a vineyard'],
-    ['la truffe','the truffle'],['un champignon','a mushroom'],['creuser','to dig'],
+    ['la truffe','the truffle'],['un champignon','a mushroom'],
+    ['creuser','to dig', FelixBlog.verb('creuser',
+      ["je creuse","tu creuses","il/elle creuse","nous creusons","vous creusez","ils/elles creusent"],
+      ["j'ai creusé","tu as creusé","il/elle a creusé","nous avons creusé","vous avez creusé","ils/elles ont creusé"],
+      ["je creusais","tu creusais","il/elle creusait","nous creusions","vous creusiez","ils/elles creusaient"],
+      ["je creuserai","tu creuseras","il/elle creusera","nous creuserons","vous creuserez","ils/elles creuseront"])],
     ['râpé(e)','grated'],['une grotte','a cave'],['un amphithéâtre','an amphitheatre']
   ],
   gram:[

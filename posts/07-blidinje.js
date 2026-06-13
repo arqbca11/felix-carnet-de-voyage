@@ -26,7 +26,17 @@ FelixBlog.register({
     ['un plateau','a high plain, a plateau'],['un berger','a shepherd'],['un troupeau','a flock, a herd'],
     ['un mouton','a sheep'],['le fromage de brebis','ewe\'s-milk cheese'],['une pierre tombale','a gravestone'],
     ['le Moyen Âge','the Middle Ages'],['un caillou','a pebble'],['l\'herbe','grass'],
-    ['avancer','to move forward'],['mouillé','wet, damp'],['suffire','to be enough']
+    ['avancer','to move forward', FelixBlog.verb('avancer',
+      ["j'avance","tu avances","il/elle avance","nous avançons","vous avancez","ils/elles avancent"],
+      ["j'ai avancé","tu as avancé","il/elle a avancé","nous avons avancé","vous avez avancé","ils/elles ont avancé"],
+      ["j'avançais","tu avançais","il/elle avançait","nous avancions","vous avanciez","ils/elles avançaient"],
+      ["j'avancerai","tu avanceras","il/elle avancera","nous avancerons","vous avancerez","ils/elles avanceront"])],
+    ['mouillé','wet, damp'],
+    ['suffire','to be enough', FelixBlog.verb('suffire',
+      ["je suffis","tu suffis","il/elle suffit","nous suffisons","vous suffisez","ils/elles suffisent"],
+      ["j'ai suffi","tu as suffi","il/elle a suffi","nous avons suffi","vous avez suffi","ils/elles ont suffi"],
+      ["je suffisais","tu suffisais","il/elle suffisait","nous suffisions","vous suffisiez","ils/elles suffisaient"],
+      ["je suffirai","tu suffiras","il/elle suffira","nous suffirons","vous suffirez","ils/elles suffiront"])]
   ],
   gram:[
     {h:'The keystone again: <em>passé composé</em> vs <em>imparfait</em>, on foot',

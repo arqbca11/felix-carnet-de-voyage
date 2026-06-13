@@ -26,7 +26,12 @@ FelixBlog.register({
     ['une forêt vierge','a primeval forest'],['un arbre','a tree'],['une cascade','a waterfall'],
     ['sombre','dark'],['frais','cool, fresh'],['raide','steep'],
     ['une chaîne','a chain'],['l\'exposition','exposure (to the drop)'],['une frontière','a border'],
-    ['un lac','a lake'],['en forme de cœur','heart-shaped'],['le vent','wind']
+    ['un lac','a lake'],['en forme de cœur','heart-shaped'],['le vent','wind'],
+    ['monter','to go up, to climb', FelixBlog.verb('monter',
+      ["je monte","tu montes","il/elle monte","nous montons","vous montez","ils/elles montent"],
+      ["je suis monté(e)","tu es monté(e)","il/elle est monté(e)","nous sommes monté(e)s","vous êtes monté(e)(s)","ils/elles sont monté(e)s"],
+      ["je montais","tu montais","il/elle montait","nous montions","vous montiez","ils/elles montaient"],
+      ["je monterai","tu monteras","il/elle montera","nous monterons","vous monterez","ils/elles monteront"])]
   ],
   gram:[
     {h:'Keystone, at altitude: <em>passé composé</em> vs <em>imparfait</em>',

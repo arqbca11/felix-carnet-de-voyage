@@ -25,7 +25,12 @@ FelixBlog.register({
   vocab:[
     ['au pied de','at the foot of'],['une paroi','a rock face, a wall'],['un canyon','a canyon'],
     ['une rafale','a gust (of wind)'],['une corde','a rope'],['une grimpeuse','a (female) climber'],
-    ['une prise','a hold'],['une longueur','a pitch'],['partager','to share'],
+    ['une prise','a hold'],['une longueur','a pitch'],
+    ['partager','to share', FelixBlog.verb('partager',
+      ["je partage","tu partages","il/elle partage","nous partageons","vous partagez","ils/elles partagent"],
+      ["j'ai partagé","tu as partagé","il/elle a partagé","nous avons partagé","vous avez partagé","ils/elles ont partagé"],
+      ["je partageais","tu partageais","il/elle partageait","nous partagions","vous partagiez","ils/elles partageaient"],
+      ["je partagerai","tu partageras","il/elle partagera","nous partagerons","vous partagerez","ils/elles partageront"])],
     ['l\'effort','effort'],['une île','an island'],['d\'un coup','all at once, suddenly']
   ],
   gram:[

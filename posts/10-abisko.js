@@ -27,7 +27,12 @@ FelixBlog.register({
     ['un sentier','a trail, a path'],['une cabane','a cabin, a hut'],['un renne','a reindeer'],
     ['un éleveur','a herder'],['un bouleau','a birch'],['un ruisseau','a stream'],
     ['une gourde','a flask, a water bottle'],['un moustique','a mosquito'],['à gué','by wading, across a ford'],
-    ['un poêle','a stove'],['la fatigue','tiredness'],['vide','empty']
+    ['un poêle','a stove'],['la fatigue','tiredness'],['vide','empty'],
+    ['marcher','to walk', FelixBlog.verb('marcher',
+      ["je marche","tu marches","il/elle marche","nous marchons","vous marchez","ils/elles marchent"],
+      ["j'ai marché","tu as marché","il/elle a marché","nous avons marché","vous avez marché","ils/elles ont marché"],
+      ["je marchais","tu marchais","il/elle marchait","nous marchions","vous marchiez","ils/elles marchaient"],
+      ["je marcherai","tu marcheras","il/elle marchera","nous marcherons","vous marcherez","ils/elles marcheront"])]
   ],
   gram:[
     {h:'The keystone, hut to hut: <em>passé composé</em> vs <em>imparfait</em>',
