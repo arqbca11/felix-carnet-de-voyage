@@ -154,6 +154,22 @@
   .gram .ex{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);}
   .gram .arrow{color:var(--muted);font-style:normal;}
 
+  /* VERB CONJUGATION (vocab) */
+  .conj-btn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-left:2px;
+    border:1px solid var(--line-2);background:var(--surface);color:var(--accent);border-radius:6px;font-size:10px;
+    line-height:1;cursor:pointer;padding:0;vertical-align:middle;transition:all .15s;font-family:'Schibsted Grotesk',sans-serif;}
+  .conj-btn:hover{border-color:var(--accent);background:var(--accent-wash);}
+  .conj-btn.open{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .conj-row{display:none;}
+  .conj-row.open{display:table-row;animation:fade .2s ease;}
+  .conj-row > td{padding:2px 0 12px;border-bottom:1px solid var(--line);}
+  .conj-panel{background:var(--surface);border:1px solid var(--line-2);border-radius:10px;padding:12px 14px;}
+  .conj-inf{font-family:'Newsreader',serif;font-style:italic;color:var(--accent-deep);font-size:14.5px;font-weight:600;margin-bottom:9px;}
+  .conj-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px 18px;}
+  .conj-tname{font-size:10px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:4px;}
+  .conj-tense ul{list-style:none;margin:0;padding:0;}
+  .conj-tense li{font-family:'Newsreader',serif;font-size:13px;color:var(--ink-soft);line-height:1.55;}
+
   .map-toggle{position:fixed;right:16px;bottom:16px;z-index:1200;background:var(--accent);color:#fff;border:none;border-radius:30px;
     padding:13px 21px;font-family:'Schibsted Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;
     box-shadow:0 10px 26px -8px rgba(26,115,255,.5);display:none;align-items:center;gap:8px;}
@@ -264,7 +280,13 @@ const LOADED_FILES = new Set();           // post files already injected (never 
 const HOW_MANY = 3;                       // how many of the latest weeks to display
 
 window.FelixBlog = {
-  register(post){ POST_BY_ID[post.id] = post; }
+  register(post){ POST_BY_ID[post.id] = post; },
+  // Helper for verb vocab entries: build a conjugation object the notes panel can render.
+  // Each tense is an array of the 6 persons (je…ils), already including pronoun + auxiliary.
+  // Usage in a post: ['marcher','to walk', FelixBlog.verb('marcher', pres, passeCompose, imparfait, futur)]
+  verb(inf, pres, pc, imp, fut){
+    return { inf, conj:[['Présent',pres],['Passé composé',pc],['Imparfait',imp],['Futur simple',fut]] };
+  }
 };
 
 // Which manifest entries to show "as of" a given ISO day: the latest three with date <= cutoff.
@@ -326,7 +348,18 @@ function buildFeed(){
   const frHTML = post.fr.map((p,i) =>
     `<p><button class="pp-btn" data-play="para" data-id="${post.id}" data-i="${i}" aria-label="Lire">${ICON_PLAY}</button>${p}</p>`).join('');
   const enHTML = post.en.map(p => `<p>${p}</p>`).join('');
-  const vocabRows = post.vocab.map(v => `<tr><td class="fr">${v[0]}</td><td class="en">${v[1]}</td></tr>`).join('');
+  const vocabRows = post.vocab.map((v,vi) => {
+    const conj = v[2];                                 // present only on verb entries
+    const btn = conj ? ` <button class="conj-btn" data-conj="${post.id}:${vi}" aria-label="Voir la conjugaison" title="Conjugaison">▾</button>` : '';
+    let row = `<tr><td class="fr">${v[0]}${btn}</td><td class="en">${v[1]}</td></tr>`;
+    if(conj){
+      const tenses = conj.conj.map(t =>
+        `<div class="conj-tense"><div class="conj-tname">${t[0]}</div><ul>${t[1].map(f=>`<li>${f}</li>`).join('')}</ul></div>`).join('');
+      row += `<tr class="conj-row" id="conj-${post.id}-${vi}"><td colspan="2"><div class="conj-panel">`+
+             `<div class="conj-inf">${conj.inf}</div><div class="conj-grid">${tenses}</div></div></td></tr>`;
+    }
+    return row;
+  }).join('');
   const gramHTML = post.gram.map(g => `<div class="gram"><h4>${g.h}</h4><p>${g.p}</p></div>`).join('');
 
   card.innerHTML = `
@@ -365,6 +398,16 @@ function buildFeed(){
 feed.addEventListener('click', e => {
   const playBtn = e.target.closest('[data-play]');
   if (playBtn) { e.stopPropagation(); onPlay(playBtn); return; }
+  const conjBtn = e.target.closest('[data-conj]');
+  if (conjBtn) {
+    e.stopPropagation();
+    const [pid, vi] = conjBtn.dataset.conj.split(':');
+    const row = document.getElementById(`conj-${pid}-${vi}`);
+    const open = row.classList.toggle('open');
+    conjBtn.classList.toggle('open', open);
+    conjBtn.textContent = open ? '▴' : '▾';
+    return;
+  }
   const btn = e.target.closest('.act'); if (!btn) return;
   if (btn.dataset.toggle) {
     const block = document.getElementById(`${btn.dataset.toggle}-${btn.dataset.id}`);

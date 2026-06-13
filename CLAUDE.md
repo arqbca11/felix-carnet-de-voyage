@@ -90,6 +90,7 @@ transparent vocabulary); the sensibility lives in the observation, not the synta
 | 8 | 28 Jun 2026 | Sutjeska / Maglić (nr Foča) | Bosnie-Herzégovine 🇧🇦 | Perućica primeval forest w/ guide; ascent of **Maglić** (2386 m, highest in BiH), chained finish | 43.3083, 18.6889 |
 | 9 | 5 Jul 2026 | Lofoten (Henningsvær / Svolvær) | Norvège 🇳🇴 | **Flight north** (escaping the Balkan heat); midnight sun; granite sea-cliff climbing + sea kayaking | 68.1530, 14.2039 |
 | 10 | 12 Jul 2026 | Abisko / Kungsleden (Laponie) | Suède 🇸🇪 | Boat + train back overland; 7-day solo **trek** on the King's Trail; Sámi herder, reindeer, *Lapporten* | 68.3494, 18.8303 |
+| 11 | 19 Jul 2026 | Dalsland (pays des lacs) | Suède 🇸🇪 | Train south; multi-day **canoe + tent** trip across linked lakes; moose, blueberries, the calm | 59.0333, 12.2167 |
 
 > **Continuity note (week 9):** this is the one deliberate non-overland jump — a *flight*, acknowledged
 > in-text ("j'ai pris l'avion… le Monténégro attendra"), made on the reader's request to chase summer
@@ -102,13 +103,14 @@ Ivana (Croatian climber, knows the Paklenica walls by heart, leads Anića Kuk);
 Mirko (old Blidinje shepherd, no shared language but understood anyway);
 Goran (Sutjeska forest guide, speaks low under the old trees);
 Lars (Lofoten fisherman, lent Felix a kayak, grilled fish at midnight);
-Niila (Sámi reindeer herder on the Kungsleden — his family has followed the herds there for a thousand years).
+Niila (Sámi reindeer herder on the Kungsleden — his family has followed the herds there for a thousand years);
+Erik (Swede met at a lakeside fire in Dalsland, travelling with his daughter; asked Felix what comes next).
 
-**Next, teased:** south to the **grands lacs de Suède** (Swedish lakeland — e.g. Dalsland) for a
-change of mode after the long walk: **canoe + tent**, calm water, "le temps de ne rien faire" — named
-at the end of week 10. Realistic overland (train south). A return to paddling (his established skill).
-Montenegro/Durmitor remains available for later. Keep the Bouvier/Saint-Exupéry register (§2a) to the
-1–2 earned lines per post.
+**Next, teased:** Felix starts **heading back south to the continent** — a **ferry** out of Sweden
+(to Denmark / Germany), then the road. He deliberately leaves the next stop *open* ("je ne sais pas
+encore où je m'arrêterai — et, pour une fois, ça me plaît"), so the reader/user can choose it. Realistic
+overland. Montenegro/Durmitor still available for later. Keep the Bouvier/Saint-Exupéry register (§2a)
+to the 1–2 earned lines per post.
 
 ---
 
@@ -126,8 +128,14 @@ description)**. Layer other A2/B1 points on top, tied to that week's content, an
   past participle agreeing with a **preceding direct object** (`on les a mangées`). Stretch seeds left
   transparent: `plus-que-parfait` (`avait préparé`, `avait déjà grimpé`), `conditionnel passé`
   (`aurait adoré`).
-- **3 grammar notes per post**, English explanation + French examples wrapped in
-  `<span class="ex">…</span>`, with `<span class="arrow">→</span>` for glosses.
+- **At least 3 grammar notes per post** (3 minimum; **from week 11 on, aim for 4–5** to widen the
+  net), English explanation + French examples wrapped in `<span class="ex">…</span>`, with
+  `<span class="arrow">→</span>` for glosses.
+- **Future tense is now a standing topic** (learner request): keep at least one future note in play —
+  the **`futur simple`** (formation + irregular stems `serai/aurai/irai/ferai`) and the
+  **`futur proche` vs `futur simple`** contrast are good recurring beats, reused across weeks like the
+  keystone. The per-verb conjugation panels (§5) reinforce this for free (each shows a *Futur simple*
+  column).
 
 ---
 
@@ -155,8 +163,18 @@ description)**. Layer other A2/B1 points on top, tied to that week's content, an
   `[0.75, 0.9, 1.0, 1.1]`, in-memory `AUDIO_CACHE` keyed `voiceId|text`, background prefetch of the
   next paragraph. **Browser `speechSynthesis` fallback** when no key. Key/voice/speed in `localStorage`.
 - **Everything is data-driven from the `POSTS` array** (filled by registration). DOM is built in JS.
-  Events via delegation on `#feed` (`data-play`, `data-toggle`, `data-fly`). **No inline `onclick`
-  carrying French text.**
+  Events via delegation on `#feed` (`data-play`, `data-toggle`, `data-fly`, `data-conj`). **No inline
+  `onclick` carrying French text.**
+- **Calendar** (`#cal`, above the map rail): a compact month picker. Clicking a day shows the latest
+  three weeks published **on or before** it (`entriesUpTo` → `showAsOf`); the feed and map re-render.
+  Manifest entries carry an ISO `date`; days with a post get a dot. Loader is date-aware and
+  re-entrant (`ensureLoaded` never injects a post file twice).
+- **Per-verb conjugation.** A vocab entry whose **3rd element** is a conjugation object (built with
+  `FelixBlog.verb(inf, présent, passéComposé, imparfait, futur)`, each tense an array of the 6 persons
+  with pronoun + auxiliary already baked in) renders a small **▾ button**; clicking toggles a panel
+  (`.conj-row`, `data-conj="id:index"`) showing the four tenses. Plain vocab `[fr,en]` entries are
+  unchanged and show no button. The helper lives on `window.FelixBlog` so post files never redeclare
+  it (no global-`const` collision across the injected `<script>` tags).
 
 ### Layout
 - Masthead (white, faint topographic SVG lines) → **reading bar** (TTS controls / key entry / voice
@@ -195,10 +213,24 @@ FelixBlog.register({
   level:'hard A2',                  // small difficulty tag shown on the card (e.g. 'mid A2','hard A2','easy B1')
   fr:[ "...", ... ],               // ~5 paragraphs, ~280–320 words total, solid A2
   en:[ "...", ... ],               // 1:1 paragraph translation (same length array)
-  vocab:[ ['mot fr','english gloss'], ... ],   // ~12 entries
-  gram:[ {h:'Heading <em>...</em>', p:'Explanation w/ <span class="ex">…</span>'}, ... ] // 3 notes
+  vocab:[                          // from wk11: ~16–20 entries — cover ANY word a learner might not know
+    ['mot fr','english gloss'],                                   // plain entry
+    ['pagayer','to paddle', FelixBlog.verb('pagayer',             // VERB entry → adds a ▾ conjugation button
+       ["je pagaie", /* …6 persons, présent */],
+       ["j'ai pagayé", /* …passé composé */],
+       ["je pagayais", /* …imparfait */],
+       ["je pagaierai", /* …futur simple */])],
+    ...
+  ],
+  gram:[ {h:'Heading <em>...</em>', p:'Explanation w/ <span class="ex">…</span>'}, ... ] // 3+ notes (wk11+: 4–5)
 });
 ```
+
+**Verb conjugations** (`FelixBlog.verb`): each tense is an array of the **6 persons** (je→ils), with the
+pronoun **and** auxiliary already in the string (`"j'ai pagayé"`, `"je suis descendu(e)"`,
+`"je me suis baigné(e)"`) — the engine just prints them, so any irregularity/agreement is handled by
+how you write the form. Use **double-quoted** form strings (French apostrophes are then safe). Mark a
+vocab entry as a verb only if you give it real conjugations; list verbs you can conjugate correctly.
 
 And one line in `posts/manifest.js` (chronological, newest last):
 
@@ -217,8 +249,9 @@ And one line in `posts/manifest.js` (chronological, newest last):
    it one of the latest three shown. Adding a 5th week automatically drops the oldest (week 1) off
    the page; nothing in `felix_blog.html` needs editing.
 3. `fr` and `en` arrays must be the **same length** (paragraphs align side by side). Write `vocab`
-   (~12) and exactly **3 `gram` notes** tied to that week's text; reinforce the keystone and at least
-   one recurring micro-pattern.
+   (**~16–20** from wk11 — cover any word a learner might not know, and give every **verb** a
+   `FelixBlog.verb(...)` conjugation) and **at least 3 `gram` notes** (wk11+: **4–5**, keeping a future
+   note in play) tied to that week's text; reinforce the keystone and at least one recurring micro-pattern.
 4. Run the validation in §10. That's it — the map marker, route line, fly-to, play buttons,
    translation/notes toggles, and layout all generate from the data automatically.
 
@@ -258,12 +291,15 @@ for f in posts/manifest.js posts/*.js; do node --check "$f" && echo "  $f OK"; d
 #    and print which three weeks would display
 node -e '
 const fs=require("fs"),vm=require("vm");
-const POSTS=[],sb={window:{},console,FelixBlog:{register:p=>POSTS.push(p)}};sb.window.FelixBlog=sb.FelixBlog;
+const POSTS=[],sb={window:{},console,FelixBlog:{register:p=>POSTS.push(p),
+  verb:(inf,pres,pc,imp,fut)=>({inf,conj:[["Présent",pres],["Passé composé",pc],["Imparfait",imp],["Futur simple",fut]]})}};sb.window.FelixBlog=sb.FelixBlog;
 vm.createContext(sb);vm.runInContext(fs.readFileSync("posts/manifest.js","utf8"),sb);
 const M=sb.window.FELIX_MANIFEST;M.forEach(e=>vm.runInContext(fs.readFileSync(e.file,"utf8"),sb));
 let bad=0;POSTS.forEach(p=>{if(p.fr.length!==p.en.length){console.log("FR/EN MISMATCH",p.id);bad++;}
- if(p.gram.length!==3){console.log("GRAM!=3",p.id);bad++;}
- if(typeof p.lat!=="number"||typeof p.lng!=="number"){console.log("BAD COORDS",p.id);bad++;}});
+ if(p.gram.length<3){console.log("GRAM<3",p.id);bad++;}
+ if(typeof p.lat!=="number"||typeof p.lng!=="number"){console.log("BAD COORDS",p.id);bad++;}
+ (p.vocab||[]).forEach(v=>{const c=v[2];if(c){ if(!c.inf||!Array.isArray(c.conj)){console.log("BAD CONJ",p.id,v[0]);bad++;}
+   else c.conj.forEach(t=>{if(!Array.isArray(t[1])||t[1].length!==6){console.log("CONJ!=6",p.id,v[0],t[0]);bad++;}});}});});
 console.log("Latest three displayed:",M.slice(-3).map(e=>e.id).join(", "));
 console.log(bad?("FAILURES: "+bad):"ALL DATA CHECKS PASS");'
 ```
