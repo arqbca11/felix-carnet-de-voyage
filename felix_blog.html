@@ -495,8 +495,15 @@ feed.addEventListener('click', e => {
     const post = POSTS.find(x => x.id === pid);
     if (post) {
       const res = revealBtn.closest('.dictation').querySelector('.dict-result');
-      res.innerHTML = `<span class="dict-lbl">Texte original</span><span class="dict-line">${escHTML(post.fr[+i])}</span>`;
-      res.classList.add('open');
+      const showing = revealBtn.classList.toggle('on');     // toggle reveal on/off
+      if (showing) {
+        res.innerHTML = `<span class="dict-lbl">Texte original</span><span class="dict-line">${escHTML(post.fr[+i])}</span>`;
+        res.classList.add('open');
+        revealBtn.textContent = 'Masquer le texte';
+      } else {
+        res.innerHTML = ''; res.classList.remove('open');
+        revealBtn.textContent = 'Afficher le texte';
+      }
     }
     return;
   }
@@ -825,6 +832,8 @@ function dictAlign(expTok, usrTok){
 }
 function checkDictation(box, expectedText){
   const res = box.querySelector('.dict-result');
+  const rb = box.querySelector('.dict-reveal');             // a check result replaces any reveal
+  if(rb){ rb.classList.remove('on'); rb.textContent = 'Afficher le texte'; }
   const typed = box.querySelector('.dict-input').value;
   const expTok = dictTokenize(expectedText), usrTok = dictTokenize(typed);
   res.classList.add('open');
