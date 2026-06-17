@@ -818,13 +818,28 @@ function runLookup(){
   });
 }
 
+// Desktop reacts on mouse-up. Touch devices don't fire a reliable mouse-up at the
+// end of a text selection (you drag the selection handles), so once a touch is seen
+// we switch to a debounced `selectionchange` that waits for the handles to settle.
+let touchMode = false, selDebounce = null;
 document.addEventListener('mouseup', e => {
   if(lookupEl && lookupEl.contains(e.target)) return;
+  if(touchMode) return;                            // touch is handled via selectionchange
   setTimeout(runLookup, 0);                        // let the selection settle first
 });
 document.addEventListener('mousedown', e => {
   if(lookupEl && lookupEl.contains(e.target)) return;
   hideLookup();
+});
+document.addEventListener('touchstart', e => {
+  touchMode = true;
+  if(lookupEl && lookupEl.contains(e.target)) return;   // taps inside the popup keep it open
+  hideLookup();
+}, {passive:true});
+document.addEventListener('selectionchange', () => {
+  if(!touchMode) return;
+  clearTimeout(selDebounce);
+  selDebounce = setTimeout(runLookup, 420);        // wait out the selection-handle drag
 });
 document.addEventListener('keydown', e => { if(e.key==='Escape') hideLookup(); });
 window.addEventListener('scroll', hideLookup, true);
