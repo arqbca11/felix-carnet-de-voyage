@@ -170,6 +170,25 @@
   .conj-tense ul{list-style:none;margin:0;padding:0;}
   .conj-tense li{font-family:'Newsreader',serif;font-size:13px;color:var(--ink-soft);line-height:1.55;}
 
+  /* SELECTION DICTIONARY (select French text → quick gloss) */
+  .lookup{position:fixed;z-index:1500;max-width:300px;min-width:168px;background:var(--surface);
+    border:1px solid var(--line-2);border-radius:12px;box-shadow:0 16px 44px -14px rgba(0,0,0,.34);
+    padding:11px 13px 12px;font-family:'Schibsted Grotesk',sans-serif;display:none;}
+  .lookup.open{display:block;animation:fade .14s ease;}
+  .lk-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;}
+  .lk-term{font-family:'Newsreader',serif;font-style:italic;font-size:16px;line-height:1.25;
+    color:var(--accent-deep);flex:1;min-width:0;word-break:break-word;}
+  .lk-speak{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:1px solid var(--line-2);
+    background:var(--surface);color:var(--muted);cursor:pointer;display:flex;align-items:center;
+    justify-content:center;padding:0;transition:all .15s;}
+  .lk-speak:hover{border-color:var(--accent);color:var(--accent);}
+  .lk-speak.playing{border-color:var(--accent);background:var(--accent);color:#fff;}
+  .lk-speak svg{width:10px;height:10px;}
+  .lk-trans{font-size:14.5px;color:var(--ink);line-height:1.5;}
+  .lk-trans.none{color:var(--muted);font-family:'Newsreader',serif;font-style:italic;}
+  .lk-loading{font-family:'Newsreader',serif;font-style:italic;color:var(--muted);font-size:14px;}
+  .lk-src{font-size:10px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:8px;}
+
   .map-toggle{position:fixed;right:16px;bottom:16px;z-index:1200;background:var(--accent);color:#fff;border:none;border-radius:30px;
     padding:13px 21px;font-family:'Schibsted Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;
     box-shadow:0 10px 26px -8px rgba(26,115,255,.5);display:none;align-items:center;gap:8px;}
@@ -702,6 +721,113 @@ document.getElementById('cal').addEventListener('click', e => {
     showAsOf(selISO);
   }
 });
+
+// ── SELECTION DICTIONARY ──
+// Select French text inside an article → a small floating popup gives a quick gloss.
+// Hybrid source: the displayed weeks' own curated vocab first (instant, offline);
+// anything else — including multi-word phrases — is translated via the free, no-key
+// MyMemory API (CORS-enabled, so it works even when the file is opened via file://).
+const LOOKUP_CACHE = new Map();        // normalized term -> {trans, src}
+let lookupEl = null, lookupSeq = 0;
+
+// Normalize for matching/caching: lowercase, straighten apostrophes, drop punctuation.
+function normTerm(s){
+  return s.toLowerCase()
+    .replace(/[’]/g,"'")
+    .replace(/[.,;:!?«»"“”()\[\]…]/g,'')
+    .replace(/\s+/g,' ').trim();
+}
+
+// Gloss map from the vocab of every currently displayed post (incl. verb infinitives).
+function vocabIndex(){
+  const idx = new Map();
+  POSTS.forEach(p => (p.vocab||[]).forEach(v => {
+    const k = normTerm(v[0]); if(k && !idx.has(k)) idx.set(k, v[1]);
+    if(v[2] && v[2].inf){ const ik = normTerm(v[2].inf); if(ik && !idx.has(ik)) idx.set(ik, v[1]); }
+  }));
+  return idx;
+}
+
+function ensureLookupEl(){
+  if(lookupEl) return lookupEl;
+  lookupEl = document.createElement('div');
+  lookupEl.className = 'lookup';
+  document.body.appendChild(lookupEl);
+  lookupEl.addEventListener('mousedown', e => e.preventDefault());  // don't drop the selection
+  return lookupEl;
+}
+function hideLookup(){ lookupSeq++; if(lookupEl) lookupEl.classList.remove('open'); }
+
+function positionLookup(rect){
+  const el = lookupEl, w = el.offsetWidth, h = el.offsetHeight;
+  let left = rect.left + rect.width/2 - w/2;
+  left = Math.max(8, Math.min(left, window.innerWidth - w - 8));
+  let top = rect.top - h - 10;                  // prefer above the selection
+  if(top < 8) top = rect.bottom + 10;           // flip below if there's no room
+  el.style.left = left+'px'; el.style.top = top+'px';
+}
+
+function renderLookup(term, bodyHTML, rect){
+  const el = ensureLookupEl();
+  el.innerHTML =
+    `<div class="lk-head"><div class="lk-term">${term}</div>`+
+    `<button class="lk-speak" aria-label="Écouter">${ICON_PLAY}</button></div>`+
+    `<div class="lk-body">${bodyHTML}</div>`;
+  el.classList.add('open');
+  positionLookup(rect);
+  el.querySelector('.lk-speak').onclick = () => {
+    stopAll();
+    const b = el.querySelector('.lk-speak'); b.classList.add('playing'); b.innerHTML = ICON_STOP;
+    speakSequence([{text:term}]).then(() => { b.classList.remove('playing'); b.innerHTML = ICON_PLAY; });
+  };
+}
+
+async function lookupTranslate(term){
+  const key = normTerm(term);
+  if(LOOKUP_CACHE.has(key)) return LOOKUP_CACHE.get(key);
+  const hit = vocabIndex().get(key);                       // 1) curated vocab (offline, instant)
+  if(hit){ const r = {trans:hit, src:'Vocabulaire de la semaine'}; LOOKUP_CACHE.set(key,r); return r; }
+  try{                                                      // 2) free dictionary API (no key)
+    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(term)}&langpair=fr|en&de=arqbcode2026@gmail.com`);
+    const data = await res.json();
+    const t = data && data.responseData && data.responseData.translatedText;
+    if(t){ const r = {trans:t, src:'Dictionnaire · MyMemory'}; LOOKUP_CACHE.set(key,r); return r; }
+  }catch(e){}
+  return {trans:null, src:null};
+}
+
+function runLookup(){
+  const sel = window.getSelection();
+  if(!sel || sel.isCollapsed || !sel.rangeCount){ hideLookup(); return; }
+  const raw = sel.toString().trim().replace(/\s+/g,' ');
+  if(!raw || raw.length>80 || raw.split(' ').length>10){ hideLookup(); return; }
+  const node = sel.anchorNode;
+  const host = node && (node.nodeType===1 ? node : node.parentElement);
+  if(!host || !host.closest('.article')){ hideLookup(); return; }   // only the French reading text
+  const rect = sel.getRangeAt(0).getBoundingClientRect();
+  if(!rect || (!rect.width && !rect.height)){ hideLookup(); return; }
+  const my = ++lookupSeq;
+  renderLookup(raw, '<span class="lk-loading">…</span>', rect);
+  lookupTranslate(raw).then(r => {
+    if(my!==lookupSeq || !lookupEl) return;
+    const body = lookupEl.querySelector('.lk-body');
+    body.innerHTML = r.trans
+      ? `<div class="lk-trans">${r.trans}</div><div class="lk-src">${r.src}</div>`
+      : '<div class="lk-trans none">Pas de traduction trouvée.</div>';
+    positionLookup(rect);                          // re-measure now that content changed
+  });
+}
+
+document.addEventListener('mouseup', e => {
+  if(lookupEl && lookupEl.contains(e.target)) return;
+  setTimeout(runLookup, 0);                        // let the selection settle first
+});
+document.addEventListener('mousedown', e => {
+  if(lookupEl && lookupEl.contains(e.target)) return;
+  hideLookup();
+});
+document.addEventListener('keydown', e => { if(e.key==='Escape') hideLookup(); });
+window.addEventListener('scroll', hideLookup, true);
 
 // ── INIT ──
 window.addEventListener('load', () => {
