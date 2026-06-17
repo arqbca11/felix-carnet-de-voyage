@@ -151,11 +151,11 @@
   .dict-reveal:hover{border-color:var(--ink-soft);color:var(--ink);}
   .dict-result{display:none;margin-top:11px;}
   .dict-result.open{display:block;animation:fade .2s ease;}
-  .dict-score{font-family:'Schibsted Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}
-  .dict-lbl{font-family:'Schibsted Grotesk',sans-serif;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;
+  .dict-score{display:block;font-family:'Schibsted Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+  .dict-lbl{display:block;font-family:'Schibsted Grotesk',sans-serif;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;
     color:var(--muted);font-weight:600;margin:9px 0 4px;}
-  .dict-line{font-family:'Newsreader',serif;font-size:16px;line-height:1.7;color:#23262b;}
-  .dict-msg{font-family:'Newsreader',serif;font-style:italic;font-size:14px;color:var(--muted);}
+  .dict-line{display:block;font-family:'Newsreader',serif;font-size:16px;line-height:1.7;color:#23262b;}
+  .dict-msg{display:block;font-family:'Newsreader',serif;font-style:italic;font-size:14px;color:var(--muted);}
   .w-ok{color:#1f8a4c;}
   .w-miss{color:#b4453f;text-decoration:underline;text-decoration-style:wavy;text-underline-offset:2px;}
   .w-bad{color:#b4453f;text-decoration:line-through;}
@@ -403,11 +403,11 @@ function buildFeed(){
       `<span class="ptext">${p}</span>`+
       `<span class="dictation">`+
         `<textarea class="dict-input" rows="3" placeholder="Écoutez (▶) et écrivez ce que vous entendez…"></textarea>`+
-        `<div class="dict-actions">`+
+        `<span class="dict-actions">`+
           `<button class="dict-check" data-check="${post.id}:${i}">Vérifier</button>`+
           `<button class="dict-reveal" data-reveal="${post.id}:${i}">Afficher le texte</button>`+
-        `</div>`+
-        `<div class="dict-result"></div>`+
+        `</span>`+
+        `<span class="dict-result"></span>`+
       `</span>`+
     `</p>`).join('');
   const enHTML = post.en.map(p => `<p>${p}</p>`).join('');
@@ -495,7 +495,7 @@ feed.addEventListener('click', e => {
     const post = POSTS.find(x => x.id === pid);
     if (post) {
       const res = revealBtn.closest('.dictation').querySelector('.dict-result');
-      res.innerHTML = `<div class="dict-lbl">Texte original</div><div class="dict-line">${escHTML(post.fr[+i])}</div>`;
+      res.innerHTML = `<span class="dict-lbl">Texte original</span><span class="dict-line">${escHTML(post.fr[+i])}</span>`;
       res.classList.add('open');
     }
     return;
@@ -828,16 +828,16 @@ function checkDictation(box, expectedText){
   const typed = box.querySelector('.dict-input').value;
   const expTok = dictTokenize(expectedText), usrTok = dictTokenize(typed);
   res.classList.add('open');
-  if(!usrTok.length){ res.innerHTML = '<div class="dict-msg">Écrivez d\'abord ce que vous entendez.</div>'; return; }
+  if(!usrTok.length){ res.innerHTML = '<span class="dict-msg">Écrivez d\'abord ce que vous entendez.</span>'; return; }
   const {expMatch, usrMatch} = dictAlign(expTok, usrTok);
   const correct = expMatch.filter(Boolean).length;
   const pct = Math.round(correct / expTok.length * 100);
   const expHTML = expTok.map((t,k) => `<span class="${expMatch[k]?'w-ok':'w-miss'}">${escHTML(t)}</span>`).join(' ');
   const usrHTML = usrTok.map((t,k) => `<span class="${usrMatch[k]?'w-ok':'w-bad'}">${escHTML(t)}</span>`).join(' ');
   res.innerHTML =
-    `<div class="dict-score">${correct} / ${expTok.length} mots · ${pct} %</div>`+
-    `<div class="dict-lbl">Texte original</div><div class="dict-line">${expHTML}</div>`+
-    `<div class="dict-lbl">Votre réponse</div><div class="dict-line">${usrHTML}</div>`;
+    `<span class="dict-score">${correct} / ${expTok.length} mots · ${pct} %</span>`+
+    `<span class="dict-lbl">Texte original</span><span class="dict-line">${expHTML}</span>`+
+    `<span class="dict-lbl">Votre réponse</span><span class="dict-line">${usrHTML}</span>`;
 }
 
 // ── SELECTION DICTIONARY ──
