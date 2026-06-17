@@ -91,6 +91,7 @@ transparent vocabulary); the sensibility lives in the observation, not the synta
 | 9 | 5 Jul 2026 | Lofoten (Henningsvær / Svolvær) | Norvège 🇳🇴 | **Flight north** (escaping the Balkan heat); midnight sun; granite sea-cliff climbing + sea kayaking | 68.1530, 14.2039 |
 | 10 | 12 Jul 2026 | Abisko / Kungsleden (Laponie) | Suède 🇸🇪 | Boat + train back overland; 7-day solo **trek** on the King's Trail; Sámi herder, reindeer, *Lapporten* | 68.3494, 18.8303 |
 | 11 | 19 Jul 2026 | Dalsland (pays des lacs) | Suède 🇸🇪 | Train south; multi-day **canoe + tent** trip across linked lakes; moose, blueberries, the calm | 59.0333, 12.2167 |
+| 12 | 26 Jul 2026 | La Suisse saxonne (Elbsandsteingebirge, nr Rathen / Dresden) | Allemagne 🇩🇪 | **Ferry off Sweden + train south** into the continent; sandstone-**tower** climbing the strict *Saxon way* (no chalk, no metal gear, knotted-cord slings, far-apart ring bolts); summit registers; the Elbe valley; old climber Lutz | 50.9614, 14.0733 |
 
 > **Continuity note (week 9):** this is the one deliberate non-overland jump — a *flight*, acknowledged
 > in-text ("j'ai pris l'avion… le Monténégro attendra"), made on the reader's request to chase summer
@@ -104,13 +105,17 @@ Mirko (old Blidinje shepherd, no shared language but understood anyway);
 Goran (Sutjeska forest guide, speaks low under the old trees);
 Lars (Lofoten fisherman, lent Felix a kayak, grilled fish at midnight);
 Niila (Sámi reindeer herder on the Kungsleden — his family has followed the herds there for a thousand years);
-Erik (Swede met at a lakeside fire in Dalsland, travelling with his daughter; asked Felix what comes next).
+Erik (Swede met at a lakeside fire in Dalsland, travelling with his daughter; asked Felix what comes next);
+Lutz (Saxon climber, ~70, has climbed the Elbe sandstone towers since boyhood; embodies the strict local
+ethics and a quiet, unspoken memory of climbing here as freedom back "when the country was still closed").
 
-**Next, teased:** Felix starts **heading back south to the continent** — a **ferry** out of Sweden
-(to Denmark / Germany), then the road. He deliberately leaves the next stop *open* ("je ne sais pas
-encore où je m'arrêterai — et, pour une fois, ça me plaît"), so the reader/user can choose it. Realistic
-overland. Montenegro/Durmitor still available for later. Keep the Bouvier/Saint-Exupéry register (§2a)
-to the 1–2 earned lines per post.
+**Next, teased:** From Saxon Switzerland Felix keeps **rolling south by train**, and the post plants the
+hook explicitly: *"les montagnes plus hautes ne sont pas loin, et bientôt le grès laissera la place au
+calcaire"* — i.e. **limestone, higher mountains next** (Bavaria / the eastern Alps / Austria are the
+natural overland continuation; the Czech sandstone is right next door if you want a short hop instead).
+He again leaves the exact stop *open* ("je ne sais pas encore où je dormirai demain soir"), so the
+reader/user can choose. Realistic overland — no more flights. Montenegro/Durmitor is still parked and
+available for later. Keep the Bouvier/Saint-Exupéry register (§2a) to the 1–2 earned lines per post.
 
 ---
 

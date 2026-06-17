@@ -26,6 +26,9 @@ learns by reading and listening to lots of varied, real material.
 - **Select-to-translate** — highlight any word or phrase in the French text and a little popup gives a
   quick gloss, with a 🔊 button to hear it. It checks that week's own vocabulary first (instant), and
   falls back to a free online dictionary for anything else — including whole phrases.
+- **Dictation practice** — hit the ✎ button on any paragraph to hide its text and open a typing box.
+  Play the audio (▶), write what you hear, and **Vérifier** scores you with a word-by-word diff against
+  the original (correct words in green, misses in red). **Afficher le texte** reveals the answer.
 - **Interactive map** — every stop is a numbered pin joined by the travel route. Click a pin to jump to
   its post; tap **Voir sur la carte** to fly the map to a post's location.
 - **The latest three weeks** are shown, newest journey first.
@@ -72,6 +75,7 @@ to ElevenLabs to generate the audio.
 | 9 | 5 Jul 2026 | Lofoten 🇳🇴 | Midnight-sun granite sea-cliff climbing + sea kayaking |
 | 10 | 12 Jul 2026 | Abisko / Kungsleden 🇸🇪 | Seven-day solo trek on the King's Trail in Swedish Lapland |
 | 11 | 19 Jul 2026 | Dalsland 🇸🇪 | Multi-day canoe-and-tent trip across the linked lakes |
+| 12 | 26 Jul 2026 | La Suisse saxonne 🇩🇪 | Sandstone-tower climbing the strict Saxon way, in the Elbe valley |
 
 *The page always shows the most recent three weeks.*
 
