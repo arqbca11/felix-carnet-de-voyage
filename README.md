@@ -64,6 +64,13 @@ to ElevenLabs to generate the audio.
 | 2 | 17 May 2026 | Les Dolomites 🇮🇹 | Multi-pitch rock climb on the Cima Grande |
 | 3 | 24 May 2026 | Vallée de la Soča 🇸🇮 | Whitewater rafting |
 | 4 | 31 May 2026 | Piran 🇸🇮 | Sea kayaking on the Adriatic coast |
+| 5 | 7 Jun 2026 | Istrie 🇭🇷 | Parenzana cycle path through the hills + sea kayaking the wild south coast |
+| 6 | 14 Jun 2026 | Paklenica 🇭🇷 | Multi-pitch rock on the big wall Anića Kuk + the *bura* wind |
+| 7 | 21 Jun 2026 | Blidinje 🇧🇦 | Multi-day walk across the high plateau; shepherds and medieval *stećci* |
+| 8 | 28 Jun 2026 | Sutjeska / Maglić 🇧🇦 | Primeval forest + ascent of Maglić (2386 m), the highest peak in BiH |
+| 9 | 5 Jul 2026 | Lofoten 🇳🇴 | Midnight-sun granite sea-cliff climbing + sea kayaking |
+| 10 | 12 Jul 2026 | Abisko / Kungsleden 🇸🇪 | Seven-day solo trek on the King's Trail in Swedish Lapland |
+| 11 | 19 Jul 2026 | Dalsland 🇸🇪 | Multi-day canoe-and-tent trip across the linked lakes |
 
 *The page always shows the most recent three weeks.*
 
