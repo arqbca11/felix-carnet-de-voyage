@@ -22,6 +22,9 @@ learns by reading and listening to lots of varied, real material.
   notes tied to that week's text. The running theme is the A2 keystone: *passé composé* vs *imparfait*.
 - **Read aloud** — a play button on every paragraph, plus **▶ Lire l'article** to play the whole post
   with the current line highlighted as it's spoken. Adjustable speed.
+- **Select-to-translate** — highlight any word or phrase in the French text and a little popup gives a
+  quick gloss, with a 🔊 button to hear it. It checks that week's own vocabulary first (instant), and
+  falls back to a free online dictionary for anything else — including whole phrases.
 - **Interactive map** — every stop is a numbered pin joined by the travel route. Click a pin to jump to
   its post; tap **Voir sur la carte** to fly the map to a post's location.
 - **The latest three weeks** are shown, newest journey first.
@@ -108,6 +111,7 @@ whole thing works when you just open the file locally — no web server required
 
 - [Leaflet](https://leafletjs.com/) + [OpenStreetMap](https://www.openstreetmap.org/) for the map
 - [ElevenLabs](https://elevenlabs.io) text-to-speech (with the browser's `speechSynthesis` as fallback)
+- [MyMemory](https://mymemory.translated.net/) translation API for the select-to-translate popup (free, no key)
 - Google Fonts — *Schibsted Grotesk* & *Newsreader*
 - Plain HTML, CSS, and JavaScript. No frameworks, no build tooling.
 
