@@ -129,6 +129,37 @@
   .pp-btn.playing{opacity:1;border-color:var(--accent);background:var(--accent);color:#fff;}
   .pp-btn svg{width:10px;height:10px;}
 
+  /* DICTATION (per-paragraph) */
+  .dict-btn{position:absolute;left:2px;top:32px;width:22px;height:22px;border-radius:50%;border:1px solid var(--line-2);
+    background:var(--surface);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    padding:0;opacity:.5;transition:all .16s;}
+  .dict-btn:hover{opacity:1;border-color:var(--accent);color:var(--accent);}
+  .dict-btn.on{opacity:1;border-color:var(--accent);background:var(--accent);color:#fff;}
+  .dict-btn svg{width:11px;height:11px;}
+  .dictation{display:none;}
+  .article p.dictating .ptext{display:none;}
+  .article p.dictating .dictation{display:block;margin:1px 0;}
+  .dict-input{width:100%;border:1px solid var(--line-2);border-radius:10px;padding:10px 12px;background:var(--surface);
+    font-family:'Newsreader',serif;font-size:17px;line-height:1.6;color:#23262b;outline:none;resize:vertical;}
+  .dict-input:focus{border-color:var(--accent);}
+  .dict-actions{display:flex;gap:8px;margin-top:9px;}
+  .dict-check,.dict-reveal{font-family:'Schibsted Grotesk',sans-serif;font-size:12.5px;font-weight:600;
+    border-radius:8px;padding:7px 14px;cursor:pointer;border:1px solid var(--line-2);transition:all .16s;}
+  .dict-check{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .dict-check:hover{background:var(--accent-deep);border-color:var(--accent-deep);}
+  .dict-reveal{background:var(--surface);color:var(--ink-soft);}
+  .dict-reveal:hover{border-color:var(--ink-soft);color:var(--ink);}
+  .dict-result{display:none;margin-top:11px;}
+  .dict-result.open{display:block;animation:fade .2s ease;}
+  .dict-score{font-family:'Schibsted Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+  .dict-lbl{font-family:'Schibsted Grotesk',sans-serif;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin:9px 0 4px;}
+  .dict-line{font-family:'Newsreader',serif;font-size:16px;line-height:1.7;color:#23262b;}
+  .dict-msg{font-family:'Newsreader',serif;font-style:italic;font-size:14px;color:var(--muted);}
+  .w-ok{color:#1f8a4c;}
+  .w-miss{color:#b4453f;text-decoration:underline;text-decoration-style:wavy;text-underline-offset:2px;}
+  .w-bad{color:#b4453f;text-decoration:line-through;}
+
   .post-side{display:none;min-width:0;}
   .post.split .post-side{display:flex;flex-direction:column;gap:16px;}
 
@@ -346,6 +377,7 @@ function showAsOf(cutoffISO){
 const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>';
 const ICON_STOP = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>';
 const ICON_SPIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" style="animation:spin .8s linear infinite"><path d="M12 3a9 9 0 1 0 9 9"/></svg>';
+const ICON_PEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';
 
 // ── SAFE STORAGE ──
 const KEY_API='elevenlabs_api_key', KEY_VOICE='elevenlabs_voice_id', KEY_VNAME='elevenlabs_voice_name', KEY_SPEED='felix_read_speed';
@@ -365,7 +397,19 @@ function buildFeed(){
   card.className = 'post'; card.id = post.id;
 
   const frHTML = post.fr.map((p,i) =>
-    `<p><button class="pp-btn" data-play="para" data-id="${post.id}" data-i="${i}" aria-label="Lire">${ICON_PLAY}</button>${p}</p>`).join('');
+    `<p>`+
+      `<button class="pp-btn" data-play="para" data-id="${post.id}" data-i="${i}" aria-label="Lire">${ICON_PLAY}</button>`+
+      `<button class="dict-btn" data-dict="${post.id}:${i}" aria-label="Dictée" title="Dictée — écouter et écrire">${ICON_PEN}</button>`+
+      `<span class="ptext">${p}</span>`+
+      `<span class="dictation">`+
+        `<textarea class="dict-input" rows="3" placeholder="Écoutez (▶) et écrivez ce que vous entendez…"></textarea>`+
+        `<div class="dict-actions">`+
+          `<button class="dict-check" data-check="${post.id}:${i}">Vérifier</button>`+
+          `<button class="dict-reveal" data-reveal="${post.id}:${i}">Afficher le texte</button>`+
+        `</div>`+
+        `<div class="dict-result"></div>`+
+      `</span>`+
+    `</p>`).join('');
   const enHTML = post.en.map(p => `<p>${p}</p>`).join('');
   const vocabRows = post.vocab.map((v,vi) => {
     const conj = v[2];                                 // present only on verb entries
@@ -425,6 +469,35 @@ feed.addEventListener('click', e => {
     const open = row.classList.toggle('open');
     conjBtn.classList.toggle('open', open);
     conjBtn.textContent = open ? '▴' : '▾';
+    return;
+  }
+  const dictBtn = e.target.closest('[data-dict]');
+  if (dictBtn) {
+    e.stopPropagation();
+    const p = dictBtn.closest('p');
+    const on = p.classList.toggle('dictating');
+    dictBtn.classList.toggle('on', on);
+    if (on) { const ta = p.querySelector('.dict-input'); if (ta) setTimeout(() => ta.focus(), 0); }
+    return;
+  }
+  const checkBtn = e.target.closest('[data-check]');
+  if (checkBtn) {
+    e.stopPropagation();
+    const [pid, i] = checkBtn.dataset.check.split(':');
+    const post = POSTS.find(x => x.id === pid);
+    if (post) checkDictation(checkBtn.closest('.dictation'), post.fr[+i]);
+    return;
+  }
+  const revealBtn = e.target.closest('[data-reveal]');
+  if (revealBtn) {
+    e.stopPropagation();
+    const [pid, i] = revealBtn.dataset.reveal.split(':');
+    const post = POSTS.find(x => x.id === pid);
+    if (post) {
+      const res = revealBtn.closest('.dictation').querySelector('.dict-result');
+      res.innerHTML = `<div class="dict-lbl">Texte original</div><div class="dict-line">${escHTML(post.fr[+i])}</div>`;
+      res.classList.add('open');
+    }
     return;
   }
   const btn = e.target.closest('.act'); if (!btn) return;
@@ -721,6 +794,51 @@ document.getElementById('cal').addEventListener('click', e => {
     showAsOf(selISO);
   }
 });
+
+// ── DICTATION ──
+// Each paragraph has a ✎ button that hides the text and shows a typing box. The
+// learner plays the audio with the paragraph's ▶ button, writes what they hear,
+// and "Vérifier" scores it with a word-by-word diff against the original.
+function escHTML(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function dictTokenize(s){ return s.trim().split(/\s+/).filter(Boolean); }
+// Compare-key for a token: lowercase, straight apostrophes, strip edge punctuation
+// (accents are kept significant — they're part of learning to spell French).
+function dictNorm(t){
+  return t.toLowerCase().replace(/[’]/g,"'")
+    .replace(/^[^0-9a-zà-ÿœæ']+|[^0-9a-zà-ÿœæ']+$/gi,'');
+}
+// Longest-common-subsequence alignment → which expected/typed tokens matched.
+function dictAlign(expTok, usrTok){
+  const a = expTok.map(dictNorm), b = usrTok.map(dictNorm);
+  const n = a.length, m = b.length;
+  const dp = Array.from({length:n+1}, () => new Array(m+1).fill(0));
+  for(let i=n-1;i>=0;i--) for(let j=m-1;j>=0;j--)
+    dp[i][j] = a[i]===b[j] ? dp[i+1][j+1]+1 : Math.max(dp[i+1][j], dp[i][j+1]);
+  const expMatch = new Array(n).fill(false), usrMatch = new Array(m).fill(false);
+  let i=0, j=0;
+  while(i<n && j<m){
+    if(a[i]===b[j]){ expMatch[i]=usrMatch[j]=true; i++; j++; }
+    else if(dp[i+1][j] >= dp[i][j+1]) i++;
+    else j++;
+  }
+  return {expMatch, usrMatch};
+}
+function checkDictation(box, expectedText){
+  const res = box.querySelector('.dict-result');
+  const typed = box.querySelector('.dict-input').value;
+  const expTok = dictTokenize(expectedText), usrTok = dictTokenize(typed);
+  res.classList.add('open');
+  if(!usrTok.length){ res.innerHTML = '<div class="dict-msg">Écrivez d\'abord ce que vous entendez.</div>'; return; }
+  const {expMatch, usrMatch} = dictAlign(expTok, usrTok);
+  const correct = expMatch.filter(Boolean).length;
+  const pct = Math.round(correct / expTok.length * 100);
+  const expHTML = expTok.map((t,k) => `<span class="${expMatch[k]?'w-ok':'w-miss'}">${escHTML(t)}</span>`).join(' ');
+  const usrHTML = usrTok.map((t,k) => `<span class="${usrMatch[k]?'w-ok':'w-bad'}">${escHTML(t)}</span>`).join(' ');
+  res.innerHTML =
+    `<div class="dict-score">${correct} / ${expTok.length} mots · ${pct} %</div>`+
+    `<div class="dict-lbl">Texte original</div><div class="dict-line">${expHTML}</div>`+
+    `<div class="dict-lbl">Votre réponse</div><div class="dict-line">${usrHTML}</div>`;
+}
 
 // ── SELECTION DICTIONARY ──
 // Select French text inside an article → a small floating popup gives a quick gloss.
