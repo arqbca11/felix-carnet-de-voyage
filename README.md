@@ -18,8 +18,9 @@ learns by reading and listening to lots of varied, real material.
   trails, actual food, people with personality.
 - **Side-by-side English** — tap **Traduction (EN)** and the post splits into two columns, French left,
   English right, paragraph-aligned.
-- **Vocabulary & grammar notes** — tap **Notes de français** for ~12 key words and 3 focused grammar
-  notes tied to that week's text. The running theme is the A2 keystone: *passé composé* vs *imparfait*.
+- **Vocabulary & grammar notes** — tap **Notes de français** for ~16–20 key words (verbs include a
+  full conjugation panel) and 4–5 focused grammar notes tied to that week's text. The running theme is
+  the A2 keystone: *passé composé* vs *imparfait*.
 - **Read aloud** — a play button on every paragraph, plus **▶ Lire l'article** to play the whole post
   with the current line highlighted as it's spoken. Adjustable speed.
 - **Select-to-translate** — highlight any word or phrase in the French text and a little popup gives a
