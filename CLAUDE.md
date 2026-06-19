@@ -92,6 +92,10 @@ transparent vocabulary); the sensibility lives in the observation, not the synta
 | 10 | 12 Jul 2026 | Abisko / Kungsleden (Laponie) | Suède 🇸🇪 | Boat + train back overland; 7-day solo **trek** on the King's Trail; Sámi herder, reindeer, *Lapporten* | 68.3494, 18.8303 |
 | 11 | 19 Jul 2026 | Dalsland (pays des lacs) | Suède 🇸🇪 | Train south; multi-day **canoe + tent** trip across linked lakes; moose, blueberries, the calm | 59.0333, 12.2167 |
 | 12 | 26 Jul 2026 | La Suisse saxonne (Elbsandsteingebirge, nr Rathen / Dresden) | Allemagne 🇩🇪 | **Ferry off Sweden + train south** into the continent; sandstone-**tower** climbing the strict *Saxon way* (no chalk, no metal gear, knotted-cord slings, far-apart ring bolts); summit registers; the Elbe valley; old climber Lutz | 50.9614, 14.0733 |
+| 13 | 2 Aug 2026 | Berchtesgaden (Watzmann massif) | Allemagne 🇩🇪 | Train Dresden→Munich→Bavaria; sandstone gives way to **limestone**; a hard **via ferrata** on the Watzmann, ridge walking, hut warden Sepp, the Königssee | 47.6307, 12.9886 |
+| 14 | 9 Aug 2026 | Le Grossglockner (Hohe Tauern) | Autriche 🇦🇹 | Road south into Austria; roped **glacier ascent** of Austria's highest peak (3798 m), pre-dawn start, crevasses on the Pasterze; guide Karin; Chamonix/grandfather callback | 47.0744, 12.6948 |
+| 15 | 16 Aug 2026 | Le Triglav (Alpes juliennes) | Slovénie 🇸🇮 | Overland back into Slovenia (glad return — Soča/Piran callback); the cabled summit **ridge** of Triglav (2864 m), national peak; busy hut; proud local Jure | 46.3786, 13.8369 |
+| 16 | 23 Aug 2026 | Durmitor (Žabljak) | Monténégro 🇲🇪 | **Long overland hop** through Croatia/Bosnia; **pays off the week-9 tease** — Bobotov Kuk (2523 m), the Black Lake, a Tara-canyon raft (Soča/Anže callback); terse guide Vuk; turns gently homeward | 43.1547, 19.1028 |
 
 > **Continuity note (week 9):** this is the one deliberate non-overland jump — a *flight*, acknowledged
 > in-text ("j'ai pris l'avion… le Monténégro attendra"), made on the reader's request to chase summer
@@ -107,15 +111,20 @@ Lars (Lofoten fisherman, lent Felix a kayak, grilled fish at midnight);
 Niila (Sámi reindeer herder on the Kungsleden — his family has followed the herds there for a thousand years);
 Erik (Swede met at a lakeside fire in Dalsland, travelling with his daughter; asked Felix what comes next);
 Lutz (Saxon climber, ~70, has climbed the Elbe sandstone towers since boyhood; embodies the strict local
-ethics and a quiet, unspoken memory of climbing here as freedom back "when the country was still closed").
+ethics and a quiet, unspoken memory of climbing here as freedom back "when the country was still closed");
+Sepp (Bavarian hut warden in his 60s on the Watzmann, dry and generous, reads the weather better than any phone);
+Karin (Austrian Bergführerin on the Grossglockner, calm and exact, reads crevasses by instinct; notes how the glacier has shrunk);
+Jure (Slovenian who has climbed Triglav countless times — "you're only truly Slovene once you've stood up there," with an exception made for an Englishman);
+Vuk (terse Durmitor guide, says more with a glance at the sky than most say in a sentence; knows Bobotov Kuk and the Tara by heart).
 
-**Next, teased:** From Saxon Switzerland Felix keeps **rolling south by train**, and the post plants the
-hook explicitly: *"les montagnes plus hautes ne sont pas loin, et bientôt le grès laissera la place au
-calcaire"* — i.e. **limestone, higher mountains next** (Bavaria / the eastern Alps / Austria are the
-natural overland continuation; the Czech sandstone is right next door if you want a short hop instead).
-He again leaves the exact stop *open* ("je ne sais pas encore où je dormirai demain soir"), so the
-reader/user can choose. Realistic overland — no more flights. Montenegro/Durmitor is still parked and
-available for later. Keep the Bouvier/Saint-Exupéry register (§2a) to the 1–2 earned lines per post.
+**Next, teased:** Durmitor (week 16) **closed the long Montenegro arc** and turned Felix gently **homeward** —
+the post ends *"je commence, doucement, à regarder vers l'ouest… un jour, je rentrerai chez moi, à Chamonix.
+Pas encore."* So the standing direction is now **west / back toward home (Chamonix)**, but unhurried — the
+"not yet" is doing real work, so don't rush him home. Natural overland next stops heading west out of the
+Balkans: the **Croatian/Italian Adriatic**, the **Italian Alps/Dolomites** (Felix has a friend there, Marco),
+or a slow plains leg through northern Italy/France. This is the **homecoming wind-down** of a long summer —
+lean into the Bouvier register (slow travel, small encounters) for these, still 1–2 earned lines per post.
+Whether he actually reaches Chamonix or the blog keeps wandering is an open choice for the reader/user.
 
 ---
 

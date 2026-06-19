@@ -76,6 +76,10 @@ to ElevenLabs to generate the audio.
 | 10 | 12 Jul 2026 | Abisko / Kungsleden 🇸🇪 | Seven-day solo trek on the King's Trail in Swedish Lapland |
 | 11 | 19 Jul 2026 | Dalsland 🇸🇪 | Multi-day canoe-and-tent trip across the linked lakes |
 | 12 | 26 Jul 2026 | La Suisse saxonne 🇩🇪 | Sandstone-tower climbing the strict Saxon way, in the Elbe valley |
+| 13 | 2 Aug 2026 | Berchtesgaden 🇩🇪 | Limestone via ferrata in the Watzmann massif, above the Königssee |
+| 14 | 9 Aug 2026 | Le Grossglockner 🇦🇹 | Roped glacier ascent of Austria's highest peak |
+| 15 | 16 Aug 2026 | Le Triglav 🇸🇮 | The cabled summit ridge of Slovenia's national peak |
+| 16 | 23 Aug 2026 | Durmitor 🇲🇪 | Bobotov Kuk + the Tara canyon — closing the long-teased Montenegro loop |
 
 *The page always shows the most recent three weeks.*
 

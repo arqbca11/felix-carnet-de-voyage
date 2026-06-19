@@ -23,4 +23,8 @@ window.FELIX_MANIFEST = [
   { id:'abisko',    file:'posts/10-abisko.js',    date:'2026-07-12' },
   { id:'dalsland',  file:'posts/11-dalsland.js',  date:'2026-07-19' },
   { id:'saxe',      file:'posts/12-suisse-saxonne.js', date:'2026-07-26' },
+  { id:'berchtesgaden', file:'posts/13-berchtesgaden.js', date:'2026-08-02' },
+  { id:'grossglockner', file:'posts/14-grossglockner.js', date:'2026-08-09' },
+  { id:'triglav',   file:'posts/15-triglav.js',     date:'2026-08-16' },
+  { id:'durmitor',  file:'posts/16-durmitor.js',    date:'2026-08-23' },
 ];
