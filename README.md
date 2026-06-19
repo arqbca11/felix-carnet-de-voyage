@@ -80,6 +80,8 @@ to ElevenLabs to generate the audio.
 | 14 | 9 Aug 2026 | Le Grossglockner 🇦🇹 | Roped glacier ascent of Austria's highest peak |
 | 15 | 16 Aug 2026 | Le Triglav 🇸🇮 | The cabled summit ridge of Slovenia's national peak |
 | 16 | 23 Aug 2026 | Durmitor 🇲🇪 | Bobotov Kuk + the Tara canyon — closing the long-teased Montenegro loop |
+| 17 | 30 Aug 2026 | Chamonix 🇫🇷 | Home again — planning a late-season Tour du Mont Blanc (route, refuges, gear) |
+| 18 | 13 Sep 2026 | Le Tour du Mont-Blanc 🇫🇷🇮🇹🇨🇭 | The 11-day loop around Mont Blanc through three countries, back to Chamonix |
 
 *The page always shows the most recent three weeks.*
 

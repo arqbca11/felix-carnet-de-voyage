@@ -96,6 +96,8 @@ transparent vocabulary); the sensibility lives in the observation, not the synta
 | 14 | 9 Aug 2026 | Le Grossglockner (Hohe Tauern) | Autriche 🇦🇹 | Road south into Austria; roped **glacier ascent** of Austria's highest peak (3798 m), pre-dawn start, crevasses on the Pasterze; guide Karin; Chamonix/grandfather callback | 47.0744, 12.6948 |
 | 15 | 16 Aug 2026 | Le Triglav (Alpes juliennes) | Slovénie 🇸🇮 | Overland back into Slovenia (glad return — Soča/Piran callback); the cabled summit **ridge** of Triglav (2864 m), national peak; busy hut; proud local Jure | 46.3786, 13.8369 |
 | 16 | 23 Aug 2026 | Durmitor (Žabljak) | Monténégro 🇲🇪 | **Long overland hop** through Croatia/Bosnia; **pays off the week-9 tease** — Bobotov Kuk (2523 m), the Black Lake, a Tara-canyon raft (Soča/Anže callback); terse guide Vuk; turns gently homeward | 43.1547, 19.1028 |
+| 17 | 30 Aug 2026 | Chamonix | France 🇫🇷 | **Home at last.** A *planning/prep* post (future-tense showcase): a late-season **Tour du Mont-Blanc**, route + cols + booked refuges + gear; grandfather; departs in a few days | 45.9237, 6.8694 |
+| 18 | 13 Sep 2026 | Le Tour du Mont-Blanc (FR/IT/CH) | France 🇫🇷 | **Longer (6-para) journey post**, published *2 weeks after* wk17 (the gap = the hike). ~11-day late-season loop: Croix du Bonhomme → Col de la Seigne (first snow) → Elisabetta → Courmayeur → Bonatti → Grand Col Ferret → La Fouly → Champex → **Bovine** (not the iced Fenêtre d'Arpette) → Col de Balme → Tré-le-Champ ladders → Lac Blanc → Brévent → home. Grandfather + small-stone thread land the homecoming | 45.8326, 6.8652 |
 
 > **Continuity note (week 9):** this is the one deliberate non-overland jump — a *flight*, acknowledged
 > in-text ("j'ai pris l'avion… le Monténégro attendra"), made on the reader's request to chase summer
@@ -117,14 +119,14 @@ Karin (Austrian Bergführerin on the Grossglockner, calm and exact, reads crevas
 Jure (Slovenian who has climbed Triglav countless times — "you're only truly Slovene once you've stood up there," with an exception made for an Englishman);
 Vuk (terse Durmitor guide, says more with a glance at the sky than most say in a sentence; knows Bobotov Kuk and the Tara by heart).
 
-**Next, teased:** Durmitor (week 16) **closed the long Montenegro arc** and turned Felix gently **homeward** —
-the post ends *"je commence, doucement, à regarder vers l'ouest… un jour, je rentrerai chez moi, à Chamonix.
-Pas encore."* So the standing direction is now **west / back toward home (Chamonix)**, but unhurried — the
-"not yet" is doing real work, so don't rush him home. Natural overland next stops heading west out of the
-Balkans: the **Croatian/Italian Adriatic**, the **Italian Alps/Dolomites** (Felix has a friend there, Marco),
-or a slow plains leg through northern Italy/France. This is the **homecoming wind-down** of a long summer —
-lean into the Bouvier register (slow travel, small encounters) for these, still 1–2 earned lines per post.
-Whether he actually reaches Chamonix or the blog keeps wandering is an open choice for the reader/user.
+**Next, teased:** The summer arc is **closed**. Felix is **home in Chamonix**, the Tour du Mont-Blanc done,
+and week 18 ends fully open: *"L'été est fini, la boucle est fermée. Et déjà, je me demande où commencera le
+prochain chemin."* No direction is promised — that's deliberate. Natural next beats, reader's choice: the
+**turn of season into autumn/winter** (the blog *began* with spring ski-touring in this very valley — a winter
+ski-touring or splitboard post would rhyme the whole story shut), a **short local Chamonix-massif** outing as a
+breather, or a **brand-new journey** somewhere fresh. If you keep going, mind the calendar — wk18 is 13 Sep 2026,
+so a realistic next date is **autumn**, and the season/conditions should shift accordingly (shoulder season,
+then snow). Keep the Bouvier/Saint-Exupéry register to the 1–2 earned lines per post.
 
 ---
 

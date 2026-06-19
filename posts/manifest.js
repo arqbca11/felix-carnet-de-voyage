@@ -27,4 +27,6 @@ window.FELIX_MANIFEST = [
   { id:'grossglockner', file:'posts/14-grossglockner.js', date:'2026-08-09' },
   { id:'triglav',   file:'posts/15-triglav.js',     date:'2026-08-16' },
   { id:'durmitor',  file:'posts/16-durmitor.js',    date:'2026-08-23' },
+  { id:'tmb-prepa', file:'posts/17-tmb-prepa.js',   date:'2026-08-30' },
+  { id:'tmb',       file:'posts/18-tmb.js',         date:'2026-09-13' },
 ];
